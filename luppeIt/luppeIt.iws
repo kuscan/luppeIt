@@ -4,53 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/controllers/share/ShareController.java" line="57" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="504e6f3b-43d9-4c0f-9ba2-3a59dd6be697" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/config/NavigationConstants.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/login/LoginController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/main/ApplicationController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/registration/RegistrationController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/share/ShareController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/Base.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/action/Action.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/action/ActionParameter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/action/ActionParameterType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/action/UserAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/action/UserActionParameterValue.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/Category.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/Resource.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/Share.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/SharePhoto.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/ShareTag.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/share/Tag.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/status/CategoryStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/status/ResourceStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/status/ShareStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/status/TagStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/status/UserStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/user/Country.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/user/User.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/user/UserConfirmation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/user/UserType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/MailSender.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/utils/ValidationUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/login/login.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/main/application/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/main/application/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/register.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/registrationComplete.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/registrationConfirmation.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/share/submit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/share/submitComplete.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/controllers/Application.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Application/index.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layout.html" afterPath="$PROJECT_DIR$/app/views/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/application.conf" afterPath="$PROJECT_DIR$/conf/application.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/messages" afterPath="$PROJECT_DIR$/conf/messages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/routes" afterPath="$PROJECT_DIR$/conf/routes" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.iml" afterPath="$PROJECT_DIR$/luppeIt.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.iws" afterPath="$PROJECT_DIR$/luppeIt.iws" />
-    </list>
+    <list default="true" id="504e6f3b-43d9-4c0f-9ba2-3a59dd6be697" name="Default" comment="" />
     <ignored path="luppeIt.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
