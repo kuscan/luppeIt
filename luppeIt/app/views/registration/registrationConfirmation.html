@@ -1,0 +1,12 @@
+#{extends 'layout.html' /}
+
+        #{if arguments.confirmationError != null}
+            <h3>Confirmation Error</h3>
+            ${arguments.confirmationError}
+        #{/if}
+        #{else}
+            <h1>Welcome to LuppeIt!</h1>
+            You can login and start lupping from <a href="${baseUrl}/login">here</a>.
+        #{/else}
+
+

@@ -1,0 +1,66 @@
+    #{extends 'layout.html' /}
+
+        <table>
+            <tr>
+                <td colspan="2"><h3>Submit new link!</h3></td>
+            </tr>
+            #{form @share.ShareController.submitNewLink(), method:'POST', id:'submitLinkForm'}
+            #{field 'url'}
+            <tr>
+                <td>Url:</td>
+                <td>
+                    <input type="text" name="${field.name}" value="${arguments.urlValue}" />
+                    #{if arguments.urlFormatError != null}
+                        ${arguments.urlFormatError}
+                    #{/if}
+                </td>
+            </tr>
+            #{/field}
+            #{field 'category'}
+            <tr>
+                <td>Category:</td>
+                <td>
+                    #{select 'category', value:arguments.categoryValue, id:'category'}
+                        #{option 0}Choose a category...#{/option}
+                        #{list items:categories, as:'category'}
+                            #{option category.categoryId}${category.categoryName}#{/option}
+                        #{/list}
+                    #{/select}
+                    #{if arguments.categoryError != null}
+                        ${arguments.categoryError}
+                    #{/if}
+                </td>
+            </tr>
+            #{/field}
+            #{field 'title'}
+            <tr>
+                <td>Title:</td>
+                <td>
+                    <input type="text" name="${field.name}" value="${arguments.titleValue}" />
+                    #{if arguments.titleError != null}
+                        ${arguments.titleError}
+                    #{/if}
+                </td>
+            </tr>
+            #{/field}
+            #{field 'description'}
+            <tr>
+                <td>Description:</td>
+                <td>
+                    <textarea rows="8" cols="20" name="${field.name}">${arguments.descriptionValue}</textarea>
+                    #{if arguments.descriptionError != null}
+                        ${arguments.descriptionError}
+                    #{/if}
+                </td>
+            </tr>
+            #{/field}
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit new link!" />
+                    #{if arguments.resourceNotActiveError != null}
+                        ${arguments.resourceNotActiveError}
+                    #{/if}
+                </td>
+            </tr>
+            #{/form}
+        </table>

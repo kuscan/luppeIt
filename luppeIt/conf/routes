@@ -3,7 +3,39 @@
 # ~~~~
 
 # Home page
-*       /                                       Application.index
+*       /                                       main.ApplicationController.index
+
+# Registration Pages
+*       /register                               registration.RegistrationController.register
+*       /completeRegistration                   registration.RegistrationController.completeRegistration
+
+*       /confirmation                           registration.RegistrationController.validateEmail
+
+# Login Pages
+*       /login                                  login.LoginController.login
+*       /completeLogin                          login.LoginController.completeLogin
+
+# Logout
+*       /logout                                 login.LoginController.logout
+
+# Share Pages
+*       /share/submit                           share.ShareController.newShare
+*       /share/submitNewLink                    share.ShareController.submitNewLink
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

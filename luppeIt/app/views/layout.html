@@ -6,11 +6,19 @@
 </head>
 <body>
 
-    This is header!<br/>
+    <h1><a href="${baseUrl}">LuppeIt</a></h1>
+    #{if currentUser != null}
+        Welcome ${currentUser.username}! <i><a href="${baseUrl}/logout">[Logout]</a></i>
+    #{/if}
+    #{else}
+        Welcome! <i><a href="${baseUrl}/login">[Login]</a></i> <i><a href="${baseUrl}/register">[Sign Up]</a></i>
+    #{/else}
+    <hr />
 
     #{doLayout /}
 
-    This is footer!<br/>
+    <hr />
+    LuppeIt 2012<br/>
 
 </body>
 </html>

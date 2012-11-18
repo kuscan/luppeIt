@@ -1,0 +1,63 @@
+#{extends 'layout.html' /}
+
+        Just fill the form and start lupping!<br/>
+        #{form @registration.RegistrationController.completeRegistration(), method:'POST', id:'registrationForm'}
+        <p>
+            #{field 'email'}
+            <label>E-mail:</label>
+            <input type="text" name="${field.name}" value="${arguments.emailValue}"/>
+            #{if arguments.emailRequiredError != null}
+            <span class="error">
+                ${arguments.emailRequiredError}
+            </span>
+            #{/if}
+            #{if arguments.emailFormatError != null}
+            <span class="error">
+                ${arguments.emailFormatError}
+            </span>
+            #{/if}
+
+
+            #{/field}
+        </p>
+        <p>
+            #{field 'password'}
+            <label>Password:</label>
+            <input type="password" name="${field.name}" />
+            #{if arguments.passwordRequiredError != null}
+            <span class="error">
+                ${arguments.passwordRequiredError}
+            </span>
+            #{/if}
+            #{if arguments.passwordFormatError != null}
+            <span class="error">
+                ${arguments.passwordFormatError}
+            </span>
+            #{/if}
+            #{/field}
+        </p>
+        <p>
+            #{field 'passwordConfirmation'}
+            <label>Confirm Password:</label>
+            <input type="password" name="${field.name}" />
+            #{if arguments.passwordConfirmationRequiredError != null}
+            <span class="error">
+                ${arguments.passwordConfirmationRequiredError}
+            </span>
+            #{/if}
+            #{if arguments.passwordConfirmationMatchError != null}
+            <span class="error">
+                ${arguments.passwordConfirmationMatchError}
+            </span>
+            #{/if}
+            #{/field}
+        </p>
+        <p>
+            <input type="submit" value="Register!" />
+            #{if arguments.emailAlreadyExistsError != null}
+            <span class="error">
+                ${arguments.emailAlreadyExistsError}
+            </span>
+            #{/if}
+        </p>
+        #{/form}

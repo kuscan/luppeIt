@@ -1,3 +1,26 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
+#main page
+
+#registration page
+registration.emailRequiredMessage=[E-mail is required!]
+registration.emailValidationErrorMessage=[E-mail format is not correct!]
+registration.passwordRequiredMessage=[Password is required!]
+registration.passwordValidationErrorMessage=[Password format is not correct! (Must be 6 - 20 characters with no `space`)]
+registration.passwordConfirmationRequiredMessage=[Password confirmation is required!]
+registration.passwordConfirmationMatchErrorMessage=[Password confirmation does not match with password!]
+registration.emailAlreadyExistsErrorMessage=[This e-mail is already used by another user!]
+regsitration.confirmationCodeNotFoundErrorMessage=Confirmation link you clicked is not valid! Please click on the link that we sent to your e-mail address!
+
+#login page
+login.wrongUsernamePasswordErrorMessage=Wrong username or password!
+login.emailNotConfirmedErrorMessage=This e-mail address is not confirmed! Please click the confirmation link we sent you and then try logging in!
+
+#submit link page
+submitShare.urlFormatErrorMessage=URL format is incorrect!
+submitShare.categoryErrorMessage=You must select at least one category!
+submitShare.titleErrorMessage=Title is required!
+submitShare.descriptionErrorMessage=Description is required!
+submitShare.resourceNotActiveErrorMessage=The resource you are submitting a link from is not active!
