@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="504e6f3b-43d9-4c0f-9ba2-3a59dd6be697" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/LuppeItConstants.java" afterPath="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.ipr" afterPath="$PROJECT_DIR$/luppeIt.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/application.conf" afterPath="$PROJECT_DIR$/conf/application.conf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.iws" afterPath="$PROJECT_DIR$/luppeIt.iws" />
     </list>
     <ignored path="luppeIt.iws" />
@@ -83,19 +81,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.conf" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.conf" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/conf/application.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="14" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0">
+            <state line="89" column="47" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.09659091">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuppeItConstants.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LuppeItConstants.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="75" selection-start="329" selection-end="329" vertical-scroll-proportion="0.13068181">
+            <state line="35" column="123" selection-start="974" selection-end="974" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,8 +126,8 @@
         <option value="$PROJECT_DIR$/app/config/NavigationConstants.java" />
         <option value="$PROJECT_DIR$/app/views/share/submitComplete.html" />
         <option value="$PROJECT_DIR$/app/controllers/share/ShareController.java" />
-        <option value="$PROJECT_DIR$/conf/application.conf" />
         <option value="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
+        <option value="$PROJECT_DIR$/conf/application.conf" />
       </list>
     </option>
   </component>
@@ -882,16 +880,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/application.conf">
+    <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="14" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0">
+        <state line="35" column="123" selection-start="974" selection-end="974" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
+    <entry file="file://$PROJECT_DIR$/conf/application.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="75" selection-start="329" selection-end="329" vertical-scroll-proportion="0.13068181">
+        <state line="89" column="47" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.09659091">
           <folding />
         </state>
       </provider>
