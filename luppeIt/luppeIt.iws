@@ -4,7 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/app/controllers/share/ShareController.java" line="57" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="504e6f3b-43d9-4c0f-9ba2-3a59dd6be697" name="Default" comment="" />
+    <list default="true" id="504e6f3b-43d9-4c0f-9ba2-3a59dd6be697" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/LuppeItConstants.java" afterPath="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.ipr" afterPath="$PROJECT_DIR$/luppeIt.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luppeIt.iws" afterPath="$PROJECT_DIR$/luppeIt.iws" />
+    </list>
     <ignored path="luppeIt.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,8 +73,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -78,80 +83,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ShareController.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/share/ShareController.java">
+      <file leaf-file-name="application.conf" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/application.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="28" selection-start="4253" selection-end="4253" vertical-scroll-proportion="0.77840906">
-              <folding>
-                <element signature="docComment;class#ShareController#0" expanded="false" />
-                <element signature="method#checkLogin#0;class#ShareController#0" expanded="false" />
-                <element signature="e#1118#1134#0" expanded="true" />
-                <element signature="e#1726#1742#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="submitComplete.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/share/submitComplete.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="23" selection-start="55" selection-end="55" vertical-scroll-proportion="-1.25">
+            <state line="32" column="14" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NavigationConstants.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/NavigationConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="85" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Resource.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/share/Resource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="50" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Share.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/share/Share.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="28" selection-start="520" selection-end="874" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LuppeItConstants.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="LuppeItConstants.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="93" selection-start="2907" selection-end="2948" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="submit.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/share/submit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="59" selection-start="2362" selection-end="2362" vertical-scroll-proportion="-31.916666">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/routes">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="83" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
+            <state line="14" column="75" selection-start="329" selection-end="329" vertical-scroll-proportion="0.13068181">
               <folding />
             </state>
           </provider>
@@ -170,7 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/main/application/index.html" />
         <option value="$PROJECT_DIR$/app/views/layout.html" />
         <option value="$PROJECT_DIR$/app/models/share/Category.java" />
         <option value="$PROJECT_DIR$/app/models/share/Tag.java" />
@@ -180,12 +123,13 @@
         <option value="$PROJECT_DIR$/conf/routes" />
         <option value="$PROJECT_DIR$/app/models/share/Share.java" />
         <option value="$PROJECT_DIR$/app/models/share/Resource.java" />
-        <option value="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
         <option value="$PROJECT_DIR$/conf/messages" />
         <option value="$PROJECT_DIR$/app/views/share/submit.html" />
         <option value="$PROJECT_DIR$/app/config/NavigationConstants.java" />
         <option value="$PROJECT_DIR$/app/views/share/submitComplete.html" />
         <option value="$PROJECT_DIR$/app/controllers/share/ShareController.java" />
+        <option value="$PROJECT_DIR$/conf/application.conf" />
+        <option value="$PROJECT_DIR$/app/config/LuppeItConstants.java" />
       </list>
     </option>
   </component>
@@ -227,6 +171,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -503,6 +457,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luppeIt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luppeIt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="login" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -520,15 +496,9 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -550,7 +520,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -564,8 +534,8 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -602,6 +572,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -627,24 +615,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -824,144 +794,105 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/main/application/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="47" selection-start="36" selection-end="248" vertical-scroll-proportion="-5.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/login/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="50" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.29685682">
-          <folding>
-            <element signature="docComment;class#LoginController#0" expanded="false" />
-            <element signature="method#before#0;class#LoginController#0" expanded="false" />
-            <element signature="method#login#0;class#LoginController#0" expanded="false" />
-            <element signature="e#762#778#0" expanded="true" />
-            <element signature="method#completeLogin#0;class#LoginController#0" expanded="false" />
-            <element signature="e#981#997#0" expanded="true" />
-            <element signature="method#logout#0;class#LoginController#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="80" column="50" selection-start="2525" selection-end="2525" vertical-scroll-proportion="0.29685682" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="38" selection-start="211" selection-end="211" vertical-scroll-proportion="0.14018692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/main/ApplicationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="829" selection-end="829" vertical-scroll-proportion="0.20454545">
-          <folding>
-            <element signature="method#before#0;class#ApplicationController#0" expanded="false" />
-            <element signature="method#checkLogin#0;class#ApplicationController#0" expanded="false" />
-            <element signature="method#index#0;class#ApplicationController#0" expanded="false" />
-            <element signature="e#1001#1017#0" expanded="true" />
-            <element signature="method#homepage#0;class#ApplicationController#0" expanded="false" />
-            <element signature="e#1177#1193#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="8" column="38" selection-start="211" selection-end="211" vertical-scroll-proportion="0.14018692" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/share/Tag.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="54" selection-start="295" selection-end="295" vertical-scroll-proportion="0.2215909">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="13" column="54" selection-start="295" selection-end="295" vertical-scroll-proportion="0.2215909" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="55" selection-start="410" selection-end="457" vertical-scroll-proportion="0.3409091">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="20" column="55" selection-start="410" selection-end="457" vertical-scroll-proportion="0.3409091" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/share/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="55" selection-start="440" selection-end="495" vertical-scroll-proportion="0.35795453">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="21" column="55" selection-start="440" selection-end="495" vertical-scroll-proportion="0.35795453" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/routes">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="83" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/share/Share.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="28" selection-start="520" selection-end="874" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/share/Resource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="50" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="93" selection-start="2907" selection-end="2948" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="22" column="83" selection-start="942" selection-end="942" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/messages">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="100" selection-start="1473" selection-end="1473" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/share/submit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="59" selection-start="2362" selection-end="2362" vertical-scroll-proportion="-31.916666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/NavigationConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="85" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/share/submitComplete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="55" selection-end="55" vertical-scroll-proportion="-1.25">
-          <folding />
-        </state>
+        <state line="25" column="100" selection-start="1473" selection-end="1473" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/share/ShareController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="28" selection-start="4253" selection-end="4253" vertical-scroll-proportion="0.77840906">
+        <state line="118" column="28" selection-start="4253" selection-end="4253" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="docComment;class#ShareController#0" expanded="false" />
             <element signature="method#checkLogin#0;class#ShareController#0" expanded="false" />
             <element signature="e#1118#1134#0" expanded="true" />
             <element signature="e#1726#1742#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/share/submitComplete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="23" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/NavigationConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="85" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/share/Resource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="50" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/share/Share.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="28" selection-start="520" selection-end="874" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/share/submit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="59" selection-start="2362" selection-end="2362" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/main/ApplicationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="829" selection-end="829" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/application.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="14" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/LuppeItConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="75" selection-start="329" selection-end="329" vertical-scroll-proportion="0.13068181">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1022,7 +953,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

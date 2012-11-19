@@ -12,7 +12,7 @@ import play.i18n.Messages;
 public class LuppeItConstants {
 
     //basic constants
-    public static final String BASE_URL = "http://localhost:9000";
+    public static final String BASE_URL = "http://swe.cmpe.boun.edu.tr:7880";
     public static final String MAIN_PAGE_TITLE = "LuppeIt";
 
     //share statuses
