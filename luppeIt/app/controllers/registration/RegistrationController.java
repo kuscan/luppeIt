@@ -7,11 +7,6 @@ import models.user.UserConfirmation;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.mail.EmailException;
 import play.Logger;
-import play.data.validation.*;
-import play.data.validation.Error;
-import play.db.jpa.JPA;
-import play.i18n.Messages;
-import play.libs.Mail;
 import play.mvc.Before;
 import play.mvc.Controller;
 import utils.MailSender;
@@ -33,6 +28,7 @@ public class RegistrationController extends Controller {
 
     @Before
     static void before() {
+        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }

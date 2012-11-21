@@ -13,6 +13,7 @@ import play.mvc.Controller;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class ShareController extends Controller {
 
     @Before
     static void before() {
+        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
@@ -119,6 +121,7 @@ public class ShareController extends Controller {
         share.setViewCount(0);
         share.setLuppeCount(0);
         share.setDigCount(0);
+        share.setLastModifiedDate(Calendar.getInstance().getTime());
 
         share.save();
 

@@ -1,13 +1,12 @@
 package models.share;
 
 import play.db.jpa.GenericModel;
-import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +32,7 @@ public class Share extends GenericModel {
     private Integer shareStatusId;
     private Integer resourceId;
     private Integer userId;
+    private Date lastModifiedDate;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -128,5 +128,13 @@ public class Share extends GenericModel {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }

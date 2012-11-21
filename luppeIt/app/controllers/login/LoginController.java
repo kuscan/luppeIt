@@ -7,7 +7,6 @@ import play.Logger;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Scope;
 
 import java.util.HashMap;
@@ -23,6 +22,7 @@ public class LoginController extends Controller {
 
     @Before
     static void before() {
+        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
