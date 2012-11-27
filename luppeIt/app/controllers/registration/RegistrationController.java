@@ -2,6 +2,7 @@ package controllers.registration;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import database.dao.user.UserDAO;
 import models.user.User;
 import models.user.UserConfirmation;
 import org.apache.commons.lang.RandomStringUtils;
@@ -81,7 +82,7 @@ public class RegistrationController extends Controller {
             renderTemplate(NavigationConstants.registrationPage, arguments);
         }
 
-        if (User.find("email = ?", email).fetch().size() != 0) {
+        if (UserDAO.getUserCountByEmail(email) != 0) {
             arguments.put("emailAlreadyExistsError", LuppeItConstants.EMAIL_ALREADY_EXISTS_ERROR_MESSAGE);
             renderTemplate(NavigationConstants.registrationPage, arguments);
         }
@@ -96,16 +97,16 @@ public class RegistrationController extends Controller {
                                  LuppeItConstants.BASE_URL + "/confirmation?code=" + confirmationCode,
                                  email);
         } catch (EmailException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (MalformedURLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
 
         UserConfirmation userConfirmation = new UserConfirmation();
         userConfirmation.setEmail(email);
         userConfirmation.setConfirmationCode(confirmationCode);
-        userConfirmation.save();
+        UserDAO.addUserConfirmation(userConfirmation);
 
 
         User user = new User();
@@ -117,7 +118,7 @@ public class RegistrationController extends Controller {
         user.setUserStatusId(LuppeItConstants.USER_STATUS_ID_REGISTERED);
         user.setCountryId(LuppeItConstants.COUNTRY_ID_DEFAULT);
         user.setUserTypeId(LuppeItConstants.USER_TYPE_ID_DEFAULT);
-        user.save();
+        UserDAO.addUser(user);
 
         renderTemplate(NavigationConstants.registrationCompletePage, arguments);
 
@@ -129,15 +130,12 @@ public class RegistrationController extends Controller {
 
         HashMap<String, String> arguments = new HashMap<String, String>();
 
-        List<UserConfirmation> userConfirmations = new ArrayList<UserConfirmation>();
-        userConfirmations = UserConfirmation.find("confirmationCode = ?", code).fetch();
+        List<UserConfirmation> userConfirmations = UserDAO.getUserConfirmationsByConfirmationCode(code);
 
-        if (userConfirmations.size() == 0) {
+        if (userConfirmations == null || userConfirmations.size() == 0) {
             arguments.put("confirmationError", LuppeItConstants.CONFIRMATION_CODE_NOT_FOUND_ERROR);
         } else {
-            User user = User.find("email = ?", userConfirmations.get(0).getEmail()).first();
-            user.setUserStatusId(LuppeItConstants.USER_STATUS_ID_ACTIVE);
-            user.save();
+            UserDAO.updateUserStatusByEmail(userConfirmations.get(0).getEmail(), LuppeItConstants.USER_STATUS_ID_ACTIVE);
         }
 
         renderTemplate(NavigationConstants.registrationConfirmationPage, arguments);

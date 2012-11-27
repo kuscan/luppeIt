@@ -1,11 +1,12 @@
-package models;
+package models.exception;
 
 /**
  * Created with IntelliJ IDEA.
  * User: faruk
- * Date: 11/17/12
- * Time: 6:59 PM
+ * Date: 11/26/12
+ * Time: 10:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Base {
+public class LuppeItException extends Exception {
+
 }

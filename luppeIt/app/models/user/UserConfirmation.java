@@ -1,5 +1,6 @@
 package models.user;
 
+import models.BaseModel;
 import org.hibernate.annotations.GenericGenerator;
 import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
@@ -16,10 +17,8 @@ import javax.persistence.Id;
  * Time: 1:40 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-public class UserConfirmation extends GenericModel {
+public class UserConfirmation extends BaseModel {
 
-    @Id
     private String email;
     private String confirmationCode;
 

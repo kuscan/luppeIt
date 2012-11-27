@@ -2,6 +2,7 @@ package controllers.share;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import database.dao.category.CategoryDAO;
 import models.share.Category;
 import models.share.Resource;
 import models.share.Share;
@@ -42,10 +43,10 @@ public class ShareController extends Controller {
         }
     }
 
-    public static void newShare() {
+    /*public static void newShare() {
         HashMap<String, String> arguments = new HashMap<String, String>();
 
-        List<Category> categories = Category.findAll();
+        List<Category> categories = CategoryDAO.getAllCategoriesOrderByName();
 
         arguments.put("urlValue", "");
         arguments.put("categoryValue", "");
@@ -81,18 +82,23 @@ public class ShareController extends Controller {
             hasError = true;
         }
 
-        String resourceUrl = shareUrl.getHost();
-        List<Resource> resources = Resource.find("resourceName = ?", resourceUrl).fetch();
-        if (resources.size() > 0) {
-            if (resources.get(0).getResourceStatusId() != LuppeItConstants.RESOURCE_STATUS_ACTIVE) {
-                arguments.put("resourceNotActiveError", LuppeItConstants.SUBMIT_LINK_RESOURCE_NOT_ACTIVE_ERROR_MESSAGE);
-                hasError = true;
+        String resourceUrl = "";
+        try {
+            resourceUrl = shareUrl.getHost();
+            List<Resource> resources = Resource.find("resourceName = ?", resourceUrl).fetch();
+            if (resources.size() > 0) {
+                if (resources.get(0).getResourceStatusId() != LuppeItConstants.RESOURCE_STATUS_ACTIVE) {
+                    arguments.put("resourceNotActiveError", LuppeItConstants.SUBMIT_LINK_RESOURCE_NOT_ACTIVE_ERROR_MESSAGE);
+                    hasError = true;
+                }
+            } else {
+                Resource resource = new Resource();
+                resource.setResourceName(resourceUrl);
+                resource.setResourceStatusId(LuppeItConstants.RESOURCE_STATUS_ACTIVE);
+                resource.save();
             }
-        } else {
-            Resource resource = new Resource();
-            resource.setResourceName(resourceUrl);
-            resource.setResourceStatusId(LuppeItConstants.RESOURCE_STATUS_ACTIVE);
-            resource.save();
+        } catch (Exception e) {
+            hasError = true;
         }
 
         if (hasError) {
@@ -126,7 +132,7 @@ public class ShareController extends Controller {
         share.save();
 
         renderTemplate(NavigationConstants.submitLinkCompletePage, arguments, share);
-    }
+    }*/
 
 
 }

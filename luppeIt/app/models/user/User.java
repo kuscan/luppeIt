@@ -1,6 +1,7 @@
 package models.user;
 
 import config.LuppeItConstants;
+import models.BaseModel;
 import org.hibernate.annotations.GenericGenerator;
 import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
@@ -14,11 +15,8 @@ import javax.persistence.*;
  * Time: 7:08 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-public class User extends GenericModel {
+public class User extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     private String username;
     private String password;

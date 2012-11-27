@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2012-11-19 00:45:20
+Date: 2012-11-28 01:53:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,6 +57,7 @@ CREATE TABLE `action_parameter_type` (
   `action_parameter_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `action_parameter_type_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `action_paramter_type_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `action_parameter_type_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`action_parameter_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -139,12 +140,12 @@ CREATE TABLE `resource` (
   PRIMARY KEY (`resource_id`),
   KEY `resource_status_id` (`resource_status_id`),
   CONSTRAINT `resource_status_id` FOREIGN KEY (`resource_status_id`) REFERENCES `resource_status` (`resource_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('5', 'kuscan.com', '1');
+INSERT INTO `resource` VALUES ('1', 'npr.org', '1');
 
 -- ----------------------------
 -- Table structure for `resource_status`
@@ -154,13 +155,56 @@ CREATE TABLE `resource_status` (
   `resource_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `resource_status_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`resource_status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of resource_status
 -- ----------------------------
 INSERT INTO `resource_status` VALUES ('1', 'active');
 INSERT INTO `resource_status` VALUES ('2', 'passive');
+
+-- ----------------------------
+-- Table structure for `rss_resource`
+-- ----------------------------
+DROP TABLE IF EXISTS `rss_resource`;
+CREATE TABLE `rss_resource` (
+  `rss_resource_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rss_resource_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `url` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `parent_resource_id` int(11) NOT NULL,
+  `rss_resource_status_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `last_feed_date` datetime NOT NULL,
+  `update_interval_minute` int(11) NOT NULL,
+  PRIMARY KEY (`rss_resource_id`),
+  KEY `parent_resource_id_fk1` (`parent_resource_id`),
+  KEY `rss_resource_status_id_fk1` (`rss_resource_status_id`),
+  KEY `rss_resource_category_fk1` (`category_id`),
+  CONSTRAINT `parent_resource_id_fk1` FOREIGN KEY (`parent_resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `rss_resource_category_fk1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `rss_resource_status_id_fk1` FOREIGN KEY (`rss_resource_status_id`) REFERENCES `rss_resource_status` (`rss_resource_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of rss_resource
+-- ----------------------------
+INSERT INTO `rss_resource` VALUES ('1', 'npr.org | Politics', 'http://www.npr.org/rss/rss.php?id=1014', '1', '1', '3', '2012-11-26 00:00:00', '30');
+
+-- ----------------------------
+-- Table structure for `rss_resource_status`
+-- ----------------------------
+DROP TABLE IF EXISTS `rss_resource_status`;
+CREATE TABLE `rss_resource_status` (
+  `rss_resource_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rss_resource_status_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`rss_resource_status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of rss_resource_status
+-- ----------------------------
+INSERT INTO `rss_resource_status` VALUES ('1', 'active');
+INSERT INTO `rss_resource_status` VALUES ('2', 'passive');
 
 -- ----------------------------
 -- Table structure for `share`
@@ -179,6 +223,7 @@ CREATE TABLE `share` (
   `share_status_id` int(11) NOT NULL,
   `resource_id` int(11) NOT NULL,
   `user_id` bigint(20) NOT NULL,
+  `last_modified_date` datetime DEFAULT NULL,
   PRIMARY KEY (`share_id`),
   KEY `share_status_id` (`share_status_id`),
   KEY `resource_id` (`resource_id`),
@@ -188,12 +233,11 @@ CREATE TABLE `share` (
   CONSTRAINT `resource_id` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `share_status_id` FOREIGN KEY (`share_status_id`) REFERENCES `share_status` (`share_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of share
 -- ----------------------------
-INSERT INTO `share` VALUES ('1', 'Title', '123', null, 'http://kuscan.com', '0', '0', '0', '1', '1', '5', '6');
 
 -- ----------------------------
 -- Table structure for `share_photo`
@@ -233,14 +277,12 @@ INSERT INTO `share_status` VALUES ('2', 'passive');
 -- ----------------------------
 DROP TABLE IF EXISTS `share_tag`;
 CREATE TABLE `share_tag` (
-  `share_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
+  `share_tag_id` int(11) NOT NULL AUTO_INCREMENT,
+  `share_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
   `truth` int(11) NOT NULL,
-  PRIMARY KEY (`share_id`,`tag_id`),
-  KEY `tag_id` (`tag_id`),
-  CONSTRAINT `share_id` FOREIGN KEY (`share_id`) REFERENCES `share` (`share_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`share_tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of share_tag
@@ -257,11 +299,16 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`tag_id`),
   KEY `tag_status_id_fk1` (`tag_status_id`),
   CONSTRAINT `tag_status_id_fk1` FOREIGN KEY (`tag_status_id`) REFERENCES `tag_status` (`tag_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tag
 -- ----------------------------
+INSERT INTO `tag` VALUES ('1', 'programming', '1');
+INSERT INTO `tag` VALUES ('2', 'java', '1');
+INSERT INTO `tag` VALUES ('3', 'computer', '1');
+INSERT INTO `tag` VALUES ('4', 'engineering', '1');
+INSERT INTO `tag` VALUES ('5', 'play framework', '1');
 
 -- ----------------------------
 -- Table structure for `tag_status`
@@ -300,12 +347,13 @@ CREATE TABLE `user` (
   CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_status` (`user_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('6', 'faruk.kuscan@gmail.com', '123456', 'faruk.kuscan@gmail.com', '0', '0', '2', '1', '1');
+INSERT INTO `user` VALUES ('7', 'kkflmed@gmail.com', '123456', 'kkflmed@gmail.com', '0', '0', '2', '1', '1');
 
 -- ----------------------------
 -- Table structure for `user_action_1`
@@ -358,6 +406,7 @@ CREATE TABLE `user_confirmation` (
 -- Records of user_confirmation
 -- ----------------------------
 INSERT INTO `user_confirmation` VALUES ('faruk.kuscan@gmail.com', 'hMXDnMToegOPwFHXwuR6');
+INSERT INTO `user_confirmation` VALUES ('kkflmed@gmail.com', 'LtuW3WAzSIq7g5tiG7yS');
 
 -- ----------------------------
 -- Table structure for `user_status`

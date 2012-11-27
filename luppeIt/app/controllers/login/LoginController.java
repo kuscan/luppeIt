@@ -2,6 +2,7 @@ package controllers.login;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import database.dao.user.UserDAO;
 import models.user.User;
 import play.Logger;
 import play.cache.Cache;
@@ -10,6 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Scope;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,7 +51,8 @@ public class LoginController extends Controller {
             renderTemplate(NavigationConstants.loginPage, arguments);
         }
 
-        User user = User.find("email = ? and password = ?", email, password).first();
+
+        User user = UserDAO.getUserByEmailAndPassword(email, password);
         if (user == null) {
             arguments.put("loginError", LuppeItConstants.WRONG_USERNAME_PASSWORD_ERROR_MESSAGE);
             hasError = true;

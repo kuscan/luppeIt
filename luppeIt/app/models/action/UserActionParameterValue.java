@@ -1,6 +1,10 @@
 package models.action;
 
+import models.BaseModel;
+import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
+
+import javax.persistence.Entity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,7 +13,7 @@ import play.db.jpa.Model;
  * Time: 7:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserActionParameterValue extends Model {
+public class UserActionParameterValue extends BaseModel {
 
     private Integer userActionId;
     private Integer actionParameterId;

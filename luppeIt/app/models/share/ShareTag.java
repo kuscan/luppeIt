@@ -1,6 +1,12 @@
 package models.share;
 
-import play.db.jpa.Model;
+import models.BaseModel;
+import play.db.jpa.GenericModel;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,11 +15,20 @@ import play.db.jpa.Model;
  * Time: 7:21 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ShareTag extends Model {
+public class ShareTag extends BaseModel {
 
+    private Integer shareTagId;
     private Integer shareId;
     private Integer tagId;
     private Integer truth;
+
+    public Integer getShareTagId() {
+        return shareTagId;
+    }
+
+    public void setShareTagId(Integer shareTagId) {
+        this.shareTagId = shareTagId;
+    }
 
     public Integer getShareId() {
         return shareId;

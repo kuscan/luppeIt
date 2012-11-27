@@ -1,5 +1,6 @@
 package models.share;
 
+import models.BaseModel;
 import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
 
@@ -15,11 +16,8 @@ import javax.persistence.Id;
  * Time: 7:18 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-public class Resource extends GenericModel {
+public class Resource extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer resourceId;
     private String resourceName;
     private Integer resourceStatusId;

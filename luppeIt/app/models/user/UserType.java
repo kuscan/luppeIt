@@ -1,6 +1,12 @@
 package models.user;
 
-import play.db.jpa.Model;
+import models.BaseModel;
+import play.db.jpa.GenericModel;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,7 +15,7 @@ import play.db.jpa.Model;
  * Time: 7:10 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserType extends Model {
+public class UserType extends BaseModel {
 
     private Integer userTypeId;
     private String userTypeName;

@@ -1,5 +1,6 @@
 package models.share;
 
+import models.BaseModel;
 import play.db.jpa.GenericModel;
 
 import javax.persistence.Entity;
@@ -15,11 +16,8 @@ import java.util.Date;
  * Time: 7:11 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-public class Share extends GenericModel {
+public class Share extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer shareId;
     private String title;
     private String description;

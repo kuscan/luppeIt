@@ -1,6 +1,13 @@
 package models.share;
 
+import models.BaseModel;
+import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,7 +16,7 @@ import play.db.jpa.Model;
  * Time: 7:23 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SharePhoto extends Model {
+public class SharePhoto extends BaseModel {
 
     private Integer sharePhotoId;
     private String url;
