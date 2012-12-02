@@ -11,7 +11,6 @@ import play.mvc.Controller;
 import play.mvc.Scope;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -67,15 +66,15 @@ public class LoginController extends Controller {
 
         if (user.getUserStatusId() == LuppeItConstants.USER_STATUS_ID_ACTIVE) {
             Scope.Session.current().put("userId", user.getUserId());
-            Cache.set("currentUser", user, "60mn");
+            Cache.set("user" + user.getUserId().toString(), user, "60mn");
             redirect(LuppeItConstants.BASE_URL);
         }
 
     }
 
     public static void logout() {
-        Cache.delete("currentUser");
-        Scope.Session.current().put("userId", null);
+        Cache.delete("user" + Scope.Session.current().get("userId"));
+        Scope.Session.current().clear();
 
         redirect(LuppeItConstants.BASE_URL);
     }

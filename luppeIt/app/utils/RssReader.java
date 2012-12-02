@@ -1,23 +1,18 @@
 package utils;
 
 import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.io.FeedException;
-import models.exception.LuppeItException;
-import models.share.Share;
-
-import play.Logger;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-import java.net.URL;
-
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
-import com.sun.syndication.io.XmlReader;
+import models.share.Share;
+import play.Logger;
+
+import javax.sql.rowset.spi.XmlReader;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

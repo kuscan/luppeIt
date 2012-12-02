@@ -6,11 +6,11 @@ import database.dao.category.CategoryDAO;
 import database.dao.share.ShareDAO;
 import models.share.Category;
 import models.share.Share;
-import models.user.User;
 import play.Logger;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
+import play.mvc.Scope;
 import utils.RssReader;
 
 import java.io.IOException;
@@ -34,12 +34,9 @@ public class ApplicationController extends Controller {
 
     @Before
     static void checkLogin() {
-        User currentUser = (User) Cache.get("currentUser");
-        if (currentUser != null) {
-            Logger.info("User " + currentUser.getUsername() + " is logged in!");
-            renderArgs.put("currentUser", currentUser);
+        if (Scope.Session.current().contains("userId")) {
+            renderArgs.put("user", Cache.get("user" + Scope.Session.current().get("userId")));
         } else {
-            Logger.info("User is not logged in!");
         }
     }
 
@@ -47,7 +44,7 @@ public class ApplicationController extends Controller {
         /*
             If a user is logged in, go to homepage method
          */
-        if (Cache.get("currentUser") != null) {
+        if (Scope.Session.current().contains("userId")) {
             homepage();
         }
 

@@ -1,22 +1,11 @@
 package controllers.share;
 
 import config.LuppeItConstants;
-import config.NavigationConstants;
-import database.dao.category.CategoryDAO;
-import models.share.Category;
-import models.share.Resource;
-import models.share.Share;
-import models.user.User;
 import play.Logger;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import play.mvc.Scope;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,9 +25,8 @@ public class ShareController extends Controller {
 
     @Before
     static void checkLogin() {
-        User currentUser = (User) Cache.get("currentUser");
-        if (currentUser != null) {
-            renderArgs.put("currentUser", currentUser);
+        if (Scope.Session.current().contains("userId")) {
+            renderArgs.put("user", Cache.get("user" + Scope.Session.current().get("userId")));
         } else {
         }
     }
