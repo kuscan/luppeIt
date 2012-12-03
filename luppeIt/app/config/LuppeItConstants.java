@@ -32,6 +32,7 @@ public class LuppeItConstants {
     public static final Integer USER_STATUS_ID_ACTIVE = 2;
 
     //user types
+    public static final Integer RSS_READER_USER_ID = 0;
     public static final Integer USER_TYPE_ID_DEFAULT = 1;
 
     //default country

@@ -23,7 +23,6 @@ public class LoginController extends Controller {
 
     @Before
     static void before() {
-        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
@@ -65,7 +64,7 @@ public class LoginController extends Controller {
 
 
         if (user.getUserStatusId() == LuppeItConstants.USER_STATUS_ID_ACTIVE) {
-            Scope.Session.current().put("userId", user.getUserId());
+            session.put("userId", user.getUserId());
             Cache.set("user" + user.getUserId().toString(), user, "60mn");
             redirect(LuppeItConstants.BASE_URL);
         }
@@ -73,8 +72,8 @@ public class LoginController extends Controller {
     }
 
     public static void logout() {
-        Cache.delete("user" + Scope.Session.current().get("userId"));
-        Scope.Session.current().clear();
+        Cache.delete("user" + session.get("userId"));
+        session.clear();
 
         redirect(LuppeItConstants.BASE_URL);
     }

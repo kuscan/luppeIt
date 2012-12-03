@@ -4,15 +4,16 @@ import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
+import config.LuppeItConstants;
+import models.share.RssResource;
 import models.share.Share;
 import play.Logger;
 
-import javax.sql.rowset.spi.XmlReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,36 +24,39 @@ import java.util.List;
  */
 public class RssReader {
 
-
-
-    public static List<Share> readRssFeed(String feedUrl) throws IOException {
+    public static List<Share> readRssFeed(RssResource rssResource) throws IOException {
 
         List<Share> shares = new ArrayList<Share>();
 
-
         XmlReader reader = null;
         try {
-            URL url = new URL(feedUrl);
+            URL url = new URL(rssResource.getUrl());
             reader = new XmlReader(url);
 
             SyndFeed feed;
             feed = new SyndFeedInput().build(reader);
-            Logger.info("Feed Title: " + feed.getAuthor());
 
             for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
                 SyndEntry entry = (SyndEntry) i.next();
-
                 Share share = new Share();
+
                 share.setTitle(entry.getTitle());
-                share.setDescription(entry.getDescription().toString());
-                share.setContent(entry.getContents().toString());
-                Logger.info("\nEntry title      : " + entry.getTitle() + "\n" +
-                            "Entry author     : " + entry.getAuthor() + "\n" +
-                            "Entry description: " + entry.getDescription() + "\n" +
-                            "Entry content    : " + ((SyndContent)entry.getContents().get(0)).getValue() + "\n" +
-                            "Entry link       : " + entry.getLink() + "\n" +
-                            "Entry links      : " + entry.getLinks() + "\n" +
-                            "Entry pubDate    : " + entry.getPublishedDate() + "\n");
+                share.setDescription(entry.getDescription().getValue());
+                share.setUrl(entry.getLink());
+                share.setAuthor(entry.getAuthor());
+                share.setLuppeCount(0);
+                share.setDigCount(0);
+                share.setViewCount(0);
+                share.setCategoryId(rssResource.getCategoryId());
+                share.setShareStatusId(LuppeItConstants.SHARE_STATUS_ACTIVE);
+                share.setRssResourceId(rssResource.getRssResourceId());
+                share.setUserId(LuppeItConstants.RSS_READER_USER_ID);
+                share.setLastModifiedDate(entry.getPublishedDate());
+                share.setContent("");
+                for (Object content: entry.getContents()) {
+                    share.setContent(share.getContent() + ((SyndContent)content).getValue());
+                }
+                shares.add(share);
             }
 
 
@@ -63,10 +67,6 @@ public class RssReader {
                 reader.close();
         }
 
-
-
-
-
-        return null;
+        return shares;
     }
 }

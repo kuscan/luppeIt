@@ -4,3 +4,8 @@
 /luppeIt.iws
 /precompiled/
 /target/
+/eclipse/
+/.settings/
+/logs/
+/*.classpath
+/*.project

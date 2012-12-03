@@ -21,21 +21,20 @@ public class ApplicationController extends Controller {
 
     @Before
     static void before() {
-        try {
+        /*try {
             RssReader.readRssFeed("http://www.npr.org/rss/rss.php?id=1014");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        Logger.info(LuppeItConstants.BASE_URL);
+        }*/
+    	Logger.info("faruk");
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
 
     @Before
     static void checkLogin() {
-        if (Scope.Session.current().contains("userId")) {
-            renderArgs.put("user", Cache.get("user" + Scope.Session.current().get("userId")));
+        if (session.contains("userId")) {
+            renderArgs.put("user", Cache.get("user" + session.get("userId")));
         } else {
         }
     }
@@ -44,7 +43,7 @@ public class ApplicationController extends Controller {
         /*
             If a user is logged in, go to homepage method
          */
-        if (Scope.Session.current().contains("userId")) {
+        if (session.contains("userId")) {
             homepage();
         }
 

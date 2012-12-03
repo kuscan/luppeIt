@@ -3,7 +3,7 @@
 #
 
 #base url
-baseUrl=http://swe.cmpe.boun.edu.tr:7880
+baseUrl=http://localhost:7880
 
 #main page
 

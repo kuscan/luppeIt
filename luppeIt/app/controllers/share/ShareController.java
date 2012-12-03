@@ -18,15 +18,14 @@ public class ShareController extends Controller {
 
     @Before
     static void before() {
-        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
 
     @Before
     static void checkLogin() {
-        if (Scope.Session.current().contains("userId")) {
-            renderArgs.put("user", Cache.get("user" + Scope.Session.current().get("userId")));
+        if (session.contains("userId")) {
+            renderArgs.put("user", Cache.get("user" + session.get("userId")));
         } else {
         }
     }

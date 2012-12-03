@@ -25,7 +25,7 @@ public class RssResource extends BaseModel {
     private Integer rssResourceStatusId;
     private Integer categoryId;
     private Integer updateIntervalMinute;
-    private Date lastFeedDate;
+    private Date nextFeedDate;
 
     public Integer getRssResourceId() {
         return rssResourceId;
@@ -83,11 +83,11 @@ public class RssResource extends BaseModel {
         this.updateIntervalMinute = updateIntervalMinute;
     }
 
-    public Date getLastFeedDate() {
-        return lastFeedDate;
+    public Date getNextFeedDate() {
+        return nextFeedDate;
     }
 
-    public void setLastFeedDate(Date lastFeedDate) {
-        this.lastFeedDate = lastFeedDate;
+    public void setNextFeedDate(Date nextFeedDate) {
+        this.nextFeedDate = nextFeedDate;
     }
 }

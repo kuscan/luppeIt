@@ -1,8 +1,18 @@
 package job;
 
+import database.dao.rssresource.RssResourceDAO;
+import database.dao.share.ShareDAO;
+import models.share.RssResource;
+import models.share.Share;
 import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
+import utils.RssReader;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,23 +21,44 @@ import play.jobs.Job;
  * Time: 9:51 PM
  * To change this template use File | Settings | File Templates.
  */
-@Every("5mn")
+@Every("1mn")
 public class UpdateFeedJob extends Job {
 
     public void doJob() {
         Logger.info("UpdateFeedJob started!");
 
-       /* *//*
-            Get all active rssResources
-         *//*
-        List<RssResource> rssResources = RssResourceDAO.getAllActiveRssResources();
+        /*
+            Get rss resources which need to be checked
+         */
+        List<RssResource> rssResources = RssResourceDAO.getRssResourcesToParse();
 
-        *//*
-            Iterate over rssResources
-         *//*
         for (RssResource rssResource: rssResources) {
+            try {
+                Logger.info("Parse RssResource started: " + rssResource.getRssResourceName());
+                List<Share> shares = ShareDAO.getSharesByRssResourceId(rssResource.getRssResourceId());
+                if (shares == null) {
+                	shares = new ArrayList<Share>();
+                }
+                Logger.info("Number of shares in DB: " + ((Integer)shares.size()).toString());
+                List<Share> sharesFromRss = RssReader.readRssFeed(rssResource);
+                Logger.info("Number of shares from RSS : " + ((Integer)sharesFromRss.size()).toString());
 
-        }*/
+                for (Share share: sharesFromRss) {
+                    if (!shares.contains(share)) {
+                        Logger.info("Share to insert into DB: " + share.getTitle() + " " + share.getUrl());
+                        ShareDAO.addShare(share);
+                    }
+                }
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MINUTE, rssResource.getUpdateIntervalMinute());
+                rssResource.setNextFeedDate(cal.getTime());
+                RssResourceDAO.updateRssResource(rssResource);
+                Logger.info("Parse RssResource ended!");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         Logger.info("UpdateFeedJob finished!");
     }

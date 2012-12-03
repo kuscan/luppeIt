@@ -29,7 +29,6 @@ public class RegistrationController extends Controller {
 
     @Before
     static void before() {
-        Logger.info(LuppeItConstants.BASE_URL);
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
@@ -125,8 +124,6 @@ public class RegistrationController extends Controller {
     }
 
     public static void validateEmail(String code) {
-
-        Logger.info(code);
 
         HashMap<String, String> arguments = new HashMap<String, String>();
 

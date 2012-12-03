@@ -23,14 +23,22 @@ public class Share extends BaseModel {
     private String description;
     private String content;
     private String url;
+    private String author;
     private Integer luppeCount;
     private Integer digCount;
     private Integer viewCount;
     private Integer categoryId;
     private Integer shareStatusId;
-    private Integer resourceId;
+    private Integer rssResourceId;
     private Integer userId;
     private Date lastModifiedDate;
+
+    public boolean equals(Object other) {
+        if (this.title.equals(((Share)other).getTitle()) && this.url.equals(((Share)other).getUrl())) {
+            return true;
+        }
+        return false;
+    }
 
     public Integer getCategoryId() {
         return categoryId;
@@ -112,12 +120,12 @@ public class Share extends BaseModel {
         this.shareStatusId = shareStatusId;
     }
 
-    public Integer getResourceId() {
-        return resourceId;
+    public Integer getRssResourceId() {
+        return rssResourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
-        this.resourceId = resourceId;
+    public void setRssResourceId(Integer rssResourceId) {
+        this.rssResourceId = rssResourceId;
     }
 
     public Integer getUserId() {
@@ -134,5 +142,13 @@ public class Share extends BaseModel {
 
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
