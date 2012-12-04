@@ -21,7 +21,7 @@ import java.util.List;
  * Time: 9:51 PM
  * To change this template use File | Settings | File Templates.
  */
-@Every("1mn")
+@Every("5mn")
 public class UpdateFeedJob extends Job {
 
     public void doJob() {
