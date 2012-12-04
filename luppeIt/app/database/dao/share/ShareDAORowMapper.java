@@ -49,7 +49,7 @@ public class ShareDAORowMapper {
                 share.setShareStatusId(rs.getInt(SHARE_STATUS_ID_COLUMN));
                 share.setRssResourceId(rs.getInt(RSS_RESOURCE_ID_COLUMN));
                 share.setUserId(rs.getInt(USER_ID_COLUMN));
-                share.setLastModifiedDate(rs.getDate(LAST_MODIFIED_DATE_COLUMN));
+                share.setLastModifiedDate(rs.getLong(LAST_MODIFIED_DATE_COLUMN));
                 shares.add(share);
             }
             return shares;

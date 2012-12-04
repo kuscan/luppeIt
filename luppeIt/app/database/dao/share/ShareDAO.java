@@ -7,6 +7,7 @@ import play.db.jpa.JPQL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -55,26 +56,7 @@ public class ShareDAO {
     }
 
     public static boolean addShare(Share share) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        
-//        String query = QUERY_ADD_SHARE
-//                       .replace("{TITLE}", share.getTitle())
-//                       .replace("{DESCRIPTION}", share.getDescription())
-//                       .replace("{CONTENT}", share.getContent())
-//                       .replace("{URL}", share.getUrl())
-//                       .replace("{AUTHOR}", share.getAuthor())
-//                       .replace("{LUPPE_COUNT}", share.getLuppeCount().toString())
-//                       .replace("{DIG_COUNT}", share.getDigCount().toString())
-//                       .replace("{VIEW_COUNT}", share.getViewCount().toString())
-//                       .replace("{CATEGORY_ID}", share.getCategoryId().toString())
-//                       .replace("{SHARE_STATUS_ID}", share.getShareStatusId().toString())
-//                       .replace("{RSS_RESOURCE_ID}", share.getRssResourceId().toString())
-//                       .replace("{USER_ID}", share.getUserId().toString())
-//                       .replace("{LAST_MODIFIED_DATE}", formatter.format(share.getLastModifiedDate()));
-        
-        
 		try {
-			
 			PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_ADD_SHARE);
 			ps.setString(1, share.getTitle());
 			ps.setString(2, share.getDescription());
@@ -88,10 +70,9 @@ public class ShareDAO {
 			ps.setInt(10, share.getShareStatusId());
 			ps.setInt(11, share.getRssResourceId());
 			ps.setInt(12, share.getUserId());
-			ps.setDate(13, new Date(share.getLastModifiedDate().getTime()));
+			ps.setLong(13, share.getLastModifiedDate());
 			return ps.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return false;

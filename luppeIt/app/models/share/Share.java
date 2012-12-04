@@ -31,7 +31,7 @@ public class Share extends BaseModel {
     private Integer shareStatusId;
     private Integer rssResourceId;
     private Integer userId;
-    private Date lastModifiedDate;
+    private Long lastModifiedDate;
 
     public boolean equals(Object other) {
         if (this.title.equals(((Share)other).getTitle()) && this.url.equals(((Share)other).getUrl())) {
@@ -136,11 +136,11 @@ public class Share extends BaseModel {
         this.userId = userId;
     }
 
-    public Date getLastModifiedDate() {
+    public Long getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(Long lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 

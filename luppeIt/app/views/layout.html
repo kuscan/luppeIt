@@ -2,25 +2,27 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    #{script 'main.js' /}
-    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}" />
-    <title>${pageTitle}</title>
+#{script 'main.js' /}
+<link rel="stylesheet" type="text/css"
+	href="@{'/public/stylesheets/main.css'}" />
+<title>${pageTitle}</title>
 </head>
 <body>
 
-    <h1><a href="${baseUrl}">LuppeIt</a></h1>
-    #{if user != null}
-        Welcome ${user.username}! <i><a href="${baseUrl}/logout">[Logout]</a></i>
-    #{/if}
-    #{else}
-        Welcome! <i><a href="${baseUrl}/login">[Login]</a></i> <i><a href="${baseUrl}/register">[Sign Up]</a></i>
-    #{/else}
-    <hr />
+	<h1>
+		<a href="${baseUrl}">LuppeIt</a>
+	</h1>
+	#{if user != null} Welcome ${user.username}!
+	<i><a href="${baseUrl}/logout">[Logout]</a></i> #{/if} #{else} Welcome!
+	<i><a href="${baseUrl}/login">[Login]</a></i>
+	<i><a href="${baseUrl}/register">[Sign Up]</a></i> #{/else}
+	<hr />
 
-    #{doLayout /}
+	#{doLayout /}
 
-    <hr />
-    LuppeIt 2012<br/>
+	<hr />
+	LuppeIt 2012
+	<br />
 
 </body>
 </html>

@@ -51,8 +51,7 @@ public class UpdateFeedJob extends Job {
                 }
                 Calendar cal = Calendar.getInstance();
                 cal.add(Calendar.MINUTE, rssResource.getUpdateIntervalMinute());
-                rssResource.setNextFeedDate(cal.getTime());
-                RssResourceDAO.updateRssResource(rssResource);
+                RssResourceDAO.updateRssResourceNextFeedDate(rssResource.getRssResourceId(), cal.getTimeInMillis());
                 Logger.info("Parse RssResource ended!");
 
             } catch (IOException e) {

@@ -37,7 +37,7 @@ public class RssResourceDAORowMapper {
                 rssResource.setParentResourceId(rs.getInt(PARENT_RESOURCE_ID_COLUMN));
                 rssResource.setRssResourceStatusId(rs.getInt(RSS_RESOURCE_STATUS_ID_COLUMN));
                 rssResource.setCategoryId(rs.getInt(CATEGORY_ID_COLUMN));
-                rssResource.setNextFeedDate(rs.getDate(NEXT_FEED_DATE_COLUMN));
+                rssResource.setNextFeedDate(rs.getLong(NEXT_FEED_DATE_COLUMN));
                 rssResource.setUpdateIntervalMinute(rs.getInt(UPDATE_INTERVAL_MINUTE_COLUMN));
                 rssResources.add(rssResource);
             }
