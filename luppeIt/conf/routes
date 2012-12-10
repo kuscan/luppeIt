@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+
+
+
 # Home page
 *       /                                       main.ApplicationController.index
 
@@ -18,19 +21,15 @@
 # Logout
 *       /logout                                 login.LoginController.logout
 
-# Share Pages
-*       /share/submit                           share.ShareController.newShare
-*       /share/submitNewLink                    share.ShareController.submitNewLink
-
-
-
-
-
-
-
-
-
-
+*		/admin									admin.AdminController.index
+*		/admin/login							admin.AdminController.login
+*		/admin/completeLogin					admin.AdminController.completeLogin
+*		/admin/resources						admin.AdminController.resources
+*		/admin/resource/{resourceId}			admin.AdminController.resource
+*		/admin/rssResources						admin.AdminController.rssResources
+*		/admin/rssResource/{rssResourceId}		admin.AdminController.rssResource
+*		/admin/categories						admin.AdminController.categories
+*		/admin/category/{categoryId}			admin.AdminController.category
 
 
 

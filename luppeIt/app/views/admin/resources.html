@@ -1,0 +1,47 @@
+#{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.index()}">Back</a> | <a href="#addResource">Add New Resource</a>
+		<hr/>
+		
+		<h2>Resources</h2>
+        <ul>
+            #{list items:resources, as:'resource'}
+            <li><a href="@{admin.AdminController.resource(resource.resourceId)}">${resource.resourceName}</a></li>
+            #{/list}
+        </ul>
+        
+        <hr/>
+        <div id="addResource">
+        	#{form @admin.AdminController.addResource(), method:'POST', id:'addResourceForm'}
+        	<p>
+	            #{field 'resourceName'}
+	            <label>Resource Name:</label>
+	            <input type="text" name="${field.name}" />
+	            #{if arguments.resourceNameRequiredError != null}
+	            <span class="error">
+	                ${arguments.resourceNameRequiredError}
+	            </span>
+	            #{/if}
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'resourceStatusId'}
+	            <label>Resource Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:resourceStatuses, as:'resourceStatus'}
+	            		<option value="${resourceStatus.resourceStatusId}">${resourceStatus.resourceStatusName}</option>
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Add Resource!" />
+	            #{if arguments.addResourceError != null}
+	            <span class="error">
+	                ${arguments.addResourceError}
+	            </span>
+	            #{/if}
+	        </p>
+        	#{/form}
+        </div>

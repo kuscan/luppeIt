@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+#{script 'main.js' /}
+<link rel="stylesheet" type="text/css"
+	href="@{'/public/stylesheets/main.css'}" />
+<title>${pageTitle}</title>
+</head>
+<body>
+
+	<h1>
+		<a href="${baseUrl}">LuppeIt</a>
+	</h1>
+	#{if user != null} Welcome ${user.username}!
+	<i><a href="${baseUrl}/admin/logout">[Logout]</a></i> 
+	#{/if} 
+	#{else} 
+	Welcome!
+	<i><a href="${baseUrl}/admin/login">[Login as Administrator]</a></i>
+	#{/else}
+	<hr />
+
+	#{doLayout /}
+
+	<hr />
+	LuppeIt 2012
+	<br />
+
+</body>
+</html>

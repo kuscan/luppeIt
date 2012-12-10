@@ -1,5 +1,10 @@
 package config;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import models.status.ResourceStatus;
+
 import play.i18n.Messages;
 
 /**
@@ -34,13 +39,16 @@ public class LuppeItConstants {
     //user types
     public static final Integer RSS_READER_USER_ID = 0;
     public static final Integer USER_TYPE_ID_DEFAULT = 1;
+    public static final Integer USER_TYPE_ID_ADMIN = 2;
 
     //default country
     public static final Integer COUNTRY_ID_DEFAULT = 1;
 
 
 
-
+    //authentication error message
+    public static final String USER_NOT_AUTHENTICATED_ERROR_MESSAGE = Messages.get("error.userNotAuthenticatedErrorMessage");
+    
     //registration page error messages
     public static final String EMAIL_REQUIRED_MESSAGE = Messages.get("registration.emailRequiredMessage");
     public static final String EMAIL_VALIDATION_ERROR_MESSAGE = Messages.get("registration.emailValidationErrorMessage");

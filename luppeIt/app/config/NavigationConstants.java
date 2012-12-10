@@ -20,5 +20,17 @@ public class NavigationConstants {
 
     public static final String submitLinkPage = "/share/submit.html";
     public static final String submitLinkCompletePage = "/share/submitComplete.html";
+    
+    
+    
+    
+    public static final String adminLoginPage = "/admin/login.html";
+    public static final String adminHomePage = "/admin/home.html";
+    public static final String adminResourcesPage = "/admin/resources.html";
+    public static final String adminResourcePage = "/admin/resource.html";
+    public static final String adminRssResourcesPage = "/admin/rssResources.html";
+    public static final String adminRssResourcePage = "/admin/rssResource.html";
+    public static final String adminCategoriesPage = "/admin/categories.html";
+    public static final String adminCategoryPage = "/admin/category.html";
 
 }

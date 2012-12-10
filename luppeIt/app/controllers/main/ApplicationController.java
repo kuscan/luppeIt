@@ -21,12 +21,6 @@ public class ApplicationController extends Controller {
 
     @Before
     static void before() {
-        /*try {
-            RssReader.readRssFeed("http://www.npr.org/rss/rss.php?id=1014");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    	Logger.info("faruk");
         renderArgs.put("baseUrl", LuppeItConstants.BASE_URL);
         renderArgs.put("pageTitle", LuppeItConstants.MAIN_PAGE_TITLE);
     }
