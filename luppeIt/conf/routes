@@ -24,8 +24,10 @@
 *		/admin									admin.AdminController.index
 *		/admin/login							admin.AdminController.login
 *		/admin/completeLogin					admin.AdminController.completeLogin
+*		/admin/logout							admin.AdminController.logout
 *		/admin/resources						admin.AdminController.resources
 *		/admin/resource/{resourceId}			admin.AdminController.resource
+*		/admin/resource/delete/{resourceId}		admin.AdminController.deleteResource
 *		/admin/rssResources						admin.AdminController.rssResources
 *		/admin/rssResource/{rssResourceId}		admin.AdminController.rssResource
 *		/admin/categories						admin.AdminController.categories

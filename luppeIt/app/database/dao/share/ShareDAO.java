@@ -36,7 +36,7 @@ public class ShareDAO {
                                                        "WHERE " +
                                                        "s.share_status_id = 1 AND " +
                                                        "rr.rss_resource_status_id = 1 " +
-                                                       "ORDER BY s.last_modified_date DESC LIMIT {MOST_RECENT_LIMIT}";
+                                                       "ORDER BY s.last_modified_date DESC LIMIT ?";
     public static final String QUERY_GET_SHARES_BY_RSS_RESOURCE_ID = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date " +
                                                                      "FROM share AS s WHERE " +
                                                                      "s.rss_resource_id = {RSS_RESOURCE_ID}";
@@ -44,9 +44,14 @@ public class ShareDAO {
     public static final String QUERY_ADD_SHARE = "INSERT INTO share (title,description,content,url,author,luppe_count,dig_count,view_count,category_id,share_status_id,rss_resource_id,user_id,last_modified_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     public static List<Share> getMostRecent() {
-        String query = QUERY_GET_MOST_RECENT
-                       .replace("{MOST_RECENT_LIMIT}", MOST_RECENT_LIMIT.toString());
-        return ShareDAORowMapper.mapShareList(DB.executeQuery(query));
+        try {
+        	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
+        	ps.setInt(1, MOST_RECENT_LIMIT);
+        	return ShareDAORowMapper.mapShareList(ps.executeQuery());
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return null;
     }
 
     public static List<Share> getSharesByRssResourceId(Integer rssResourceId) {

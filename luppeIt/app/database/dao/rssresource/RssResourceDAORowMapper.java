@@ -2,6 +2,7 @@ package database.dao.rssresource;
 
 import models.share.Category;
 import models.share.RssResource;
+import models.status.RssResourceStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,8 @@ public class RssResourceDAORowMapper {
     public static final String CATEGORY_ID_COLUMN = "category_id";
     public static final String NEXT_FEED_DATE_COLUMN = "next_feed_date";
     public static final String UPDATE_INTERVAL_MINUTE_COLUMN = "update_interval_minute";
+    
+    public static final String RSS_RESOURCE_STATUS_NAME_COLUMN = "rss_resource_status_name";
 
     public static List<RssResource> mapRssResourceList(ResultSet rs) {
         try {
@@ -46,6 +49,22 @@ public class RssResourceDAORowMapper {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public static List<RssResourceStatus> mapRssResourceStatusList(ResultSet rs) {
+    	try {
+    		List<RssResourceStatus> rssResourceStatuses = new ArrayList<RssResourceStatus>();
+    		while (rs.next()) {
+    			RssResourceStatus rssResourceStatus = new RssResourceStatus();
+    			rssResourceStatus.setRssResourceStatusId(rs.getInt(RSS_RESOURCE_STATUS_ID_COLUMN));
+    			rssResourceStatus.setRssResourceStatusName(rs.getString(RSS_RESOURCE_STATUS_NAME_COLUMN));
+    			rssResourceStatuses.add(rssResourceStatus);
+    		}
+    		return rssResourceStatuses;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 
 }

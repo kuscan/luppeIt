@@ -33,6 +33,11 @@
 	            		<option value="${resourceStatus.resourceStatusId}">${resourceStatus.resourceStatusName}</option>
 	            	#{/list}
 	            </select>
+	            #{if arguments.resourceStatusIdRequiredError != null}
+	            <span class="error">
+	                ${arguments.resourceStatusIdRequiredError}
+	            </span>
+	            #{/if}
 	            #{/field}
 	        </p>
 	        <p>

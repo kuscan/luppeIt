@@ -14,15 +14,15 @@
 	</h1>
 	#{if user != null} Welcome ${user.username}!
 	<i><a href="${baseUrl}/admin/logout">[Logout]</a></i> 
+	<hr />
+	#{doLayout /}
 	#{/if} 
 	#{else} 
 	Welcome!
 	<i><a href="${baseUrl}/admin/login">[Login as Administrator]</a></i>
-	#{/else}
 	<hr />
-
-	#{doLayout /}
-
+	AUTHENTICATION ERROR!
+	#{/else}
 	<hr />
 	LuppeIt 2012
 	<br />

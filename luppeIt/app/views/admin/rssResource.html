@@ -1,1 +1,87 @@
 #{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.rssResources()}">Back</a>
+		<hr/>
+		
+		<h2>Rss Resource | ${rssResource.rssResourceName}</h2>
+        
+        <hr/>
+        <div id="updateRssResource">
+        	#{form @admin.AdminController.updateRssResource(), method:'POST', id:'updateRssResourceForm'}
+	        	#{field 'rssResourceId'}
+	        		<input type="hidden" name="${field.name}" value="${rssResource.rssResourceId}" />
+	        	#{/field}
+        	<p>
+	            #{field 'rssResourceName'}
+	            <label>Rss Resource Name:</label>
+	            <input type="text" name="${field.name}" value=${rssResource.rssResourceName} />
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'url'}
+	            <label>Url:</label>
+	            <input type="text" name="${field.name}" value="${rssResource.url}"/>
+	            #{/field}
+	        </p>
+	        <p>
+	        	#{field 'parentResourceId'}
+	            <label>Parent Resource:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:resources, as:'resource'}
+	            		#{if resource.resourceId == rssResource.parentResourceId}
+	            			<option value="${resource.resourceId}" selected>${resource.resourceName}</option>
+	            		#{/if}
+	            		#{else}
+	            			<option value="${resource.resourceId}">${resource.resourceName}</option>
+	            		#{/else}
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'rssResourceStatusId'}
+	            <label>Rss Resource Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:rssResourceStatuses, as:'rssResourceStatus'}
+	            		#{if rssResource.rssResourceStatusId == rssResourceStatus.rssResourceStatusId}
+	            			<option value="${rssResourceStatus.rssResourceStatusId}" selected>${rssResourceStatus.rssResourceStatusName}</option>
+	            		#{/if}
+	            		#{else}
+	            			<option value="${rssResourceStatus.rssResourceStatusId}">${rssResourceStatus.rssResourceStatusName}</option>
+	            		#{/else}
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	        	#{field 'categoryId'}
+	            <label>Category:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:categories, as:'category'}
+	            		#{if rssResource.categoryId == category.categoryId}
+	            			<option value="${category.categoryId}" selected>${category.categoryName}</option>
+	            		#{/if}
+	            		#{else}
+	            			<option value="${category.categoryId}">${category.categoryName}</option>
+	            		#{/else}
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'updateIntervalMinute'}
+	            <label>Update Interval (min):</label>
+	            <input type="text" name="${field.name}" value="${rssResource.updateIntervalMinute}"/>
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Update Rss Resource!" />
+	        </p>
+        	#{/form}
+        	<p>
+        		<a style="text-decoration:none;" href="@{admin.adminController.deleteRssResource(rssResource.rssResourceId)}"><input type="submit" value="Delete" /></a>
+        	</p>
+        </div>

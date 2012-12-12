@@ -30,3 +30,8 @@ submitShare.categoryErrorMessage=You must select at least one category!
 submitShare.titleErrorMessage=Title is required!
 submitShare.descriptionErrorMessage=Description is required!
 submitShare.resourceNotActiveErrorMessage=The resource you are submitting a link from is not active!
+
+#admin page
+admin.resourceCannotBeInsertedErrorMessage=Resource can not be inserted!
+admin.resourceNameRequiredErrorMessage=[Resource name is required!]
+admin.resourceStatusIdRequiredErrorMessage=[Resource status is required!]

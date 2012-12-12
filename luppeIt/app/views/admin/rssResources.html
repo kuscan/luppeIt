@@ -1,1 +1,71 @@
 #{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.index()}">Back</a> | <a href="#addRssResource">Add New Rss Resource</a>
+		<hr/>
+		
+		<h2>Rss Resources</h2>
+        <ul>
+            #{list items:rssResources, as:'rssResource'}
+            <li><a href="@{admin.AdminController.rssResource(rssResource.rssResourceId)}">${rssResource.rssResourceName}</a></li>
+            #{/list}
+        </ul>
+        
+        <hr/>
+        <div id="addRssResource">
+        	#{form @admin.AdminController.addRssResource(), method:'POST', id:'addRssResourceForm'}
+        	<p>
+	            #{field 'rssResourceName'}
+	            <label>Rss Resource Name:</label>
+	            <input type="text" name="${field.name}" />
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'url'}
+	            <label>Url:</label>
+	            <input type="text" name="${field.name}" />
+	            #{/field}
+	        </p>
+	        <p>
+	        	#{field 'parentResourceId'}
+	            <label>Parent Resource:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:resources, as:'resource'}
+	            		<option value="${resource.resourceId}">${resource.resourceName}</option>
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'rssResourceStatusId'}
+	            <label>Rss Resource Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:rssResourceStatuses, as:'rssResourceStatus'}
+	            		<option value="${rssResourceStatus.rssResourceStatusId}">${rssResourceStatus.rssResourceStatusName}</option>
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	        	#{field 'categoryId'}
+	            <label>Category:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:categories, as:'category'}
+	            		<option value="${category.categoryId}">${category.categoryName}</option>
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'updateIntervalMinute'}
+	            <label>Update Interval (min):</label>
+	            <input type="text" name="${field.name}" />
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Add Rss Resource!" />
+	        </p>
+        	#{/form}
+        </div>

@@ -51,7 +51,7 @@ public class RssReader {
                 share.setShareStatusId(LuppeItConstants.SHARE_STATUS_ACTIVE);
                 share.setRssResourceId(rssResource.getRssResourceId());
                 share.setUserId(LuppeItConstants.RSS_READER_USER_ID);
-                share.setLastModifiedDate(entry.getPublishedDate().getTime());
+                share.setLastModifiedDate(Calendar.getInstance().getTimeInMillis());
                 share.setContent("");
                 for (Object content: entry.getContents()) {
                     share.setContent(share.getContent() + ((SyndContent)content).getValue());

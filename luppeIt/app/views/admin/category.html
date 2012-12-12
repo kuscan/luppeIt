@@ -1,1 +1,43 @@
 #{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.categories()}">Back</a>
+		<hr/>
+		
+		<h2>Category | ${category.categoryName}</h2>
+        
+        <hr/>
+        <div id="updateCategory">
+        	#{form @admin.AdminController.updateCategory(), method:'POST', id:'updateCategoryForm'}
+        		#{field 'categoryId'}
+        		<input type="hidden" name="${field.name}" value="${category.categoryId}" />
+        		#{/field}
+        	<p>
+	            #{field 'categoryName'}
+	            <label>Category Name:</label>
+	            <input type="text" name="${field.name}" value="${category.categoryName}" />
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'categoryStatusId'}
+	            <label>Category Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:categoryStatuses, as:'categoryStatus'}
+	            		#{if category.categoryStatusId == categoryStatus.categoryStatusId}
+	            			<option value="${categoryStatus.categoryStatusId}" selected>${categoryStatus.categoryStatusName}</option>
+	            		#{/if}
+	            		#{else}
+	            			<option value="${categoryStatus.categoryStatusId}">${categoryStatus.categoryStatusName}</option>
+	            		#{/else}
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Update Category!" />
+	        </p>
+        	#{/form}
+        	<p>
+        		<a style="text-decoration:none;" href="@{admin.adminController.deleteCategory(category.categoryId)}"><input type="submit" value="Delete" /></a>
+        	</p>
+        </div>

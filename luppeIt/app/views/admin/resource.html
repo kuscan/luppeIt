@@ -1,1 +1,43 @@
 #{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.resources()}">Back</a>
+		<hr/>
+		
+		<h2>Resource | ${resource.resourceName}</h2>
+        
+        <hr/>
+        <div id="updateResource">
+        	#{form @admin.AdminController.updateResource(), method:'POST', id:'updateResourceForm'}
+        		#{field 'resourceId'}
+        		<input type="hidden" name="${field.name}" value="${resource.resourceId}" />
+        		#{/field}
+        	<p>
+	            #{field 'resourceName'}
+	            <label>Resource Name:</label>
+	            <input type="text" name="${field.name}" value="${resource.resourceName}" />
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'resourceStatusId'}
+	            <label>Resource Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:resourceStatuses, as:'resourceStatus'}
+	            		#{if resource.resourceStatusId == resourceStatus.resourceStatusId}
+	            			<option value="${resourceStatus.resourceStatusId}" selected>${resourceStatus.resourceStatusName}</option>
+	            		#{/if}
+	            		#{else}
+	            			<option value="${resourceStatus.resourceStatusId}">${resourceStatus.resourceStatusName}</option>
+	            		#{/else}
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Update Resource!" />
+	        </p>
+        	#{/form}
+        	<p>
+        		<a style="text-decoration:none;" href="@{admin.adminController.deleteResource(resource.resourceId)}"><input type="submit" value="Delete" /></a>
+        	</p>
+        </div>

@@ -1,1 +1,37 @@
 #{extends 'admin/adminLayout.html' /}
+
+		<a href="@{admin.AdminController.index()}">Back</a> | <a href="#addCategory">Add New Category</a>
+		<hr/>
+		
+		<h2>Categories</h2>
+        <ul>
+            #{list items:categories, as:'category'}
+            <li><a href="@{admin.AdminController.category(category.categoryId)}">${category.categoryName}</a></li>
+            #{/list}
+        </ul>
+        
+        <hr/>
+        <div id="addCategory">
+        	#{form @admin.AdminController.addCategory(), method:'POST', id:'addCategoryForm'}
+        	<p>
+	            #{field 'categoryName'}
+	            <label>Category Name:</label>
+	            <input type="text" name="${field.name}" />
+	            #{/field}
+	        </p>
+	        <p>
+	            #{field 'categoryStatusId'}
+	            <label>Category Status:</label>
+	            <select name="${field.name}">
+	            	<option value="0">Choose...</option>
+	            	#{list items:categoryStatuses, as:'categoryStatus'}
+	            		<option value="${categoryStatus.categoryStatusId}">${categoryStatus.categoryStatusName}</option>
+	            	#{/list}
+	            </select>
+	            #{/field}
+	        </p>
+	        <p>
+	            <input type="submit" value="Add Category!" />
+	        </p>
+        	#{/form}
+        </div>

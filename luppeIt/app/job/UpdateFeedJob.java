@@ -7,6 +7,7 @@ import models.share.Share;
 import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
+import play.jobs.OnApplicationStart;
 import utils.RssReader;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Every("5mn")
+@OnApplicationStart
 public class UpdateFeedJob extends Job {
 
     public void doJob() {
