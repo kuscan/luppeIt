@@ -1,22 +1,38 @@
 #{extends 'layout.html' /}
 
-        <h2>Categories</h2>
-        <ul>
-            #{list items:categories, as:'category'}
-            <li>${category.categoryName}</li>
-            #{/list}
-        </ul>
+	<div id="content">
 
-        <h2>Top News</h2>
-        Most viewed news in last hour are listed here!
+    <div class="gradient-1">
+    	<div class="container">
+        	<div class="row">
+          		<div class="span12">
+	          		<div class="tabbable">
+	           			<ul class="nav nav-tabs">
+	              			<li class="active"><a href="#topNewsTab" data-toggle="tab">Top News</a></li>
+	              			<li><a href="#mostRecentTab" data-toggle="tab">Most Recent</a></li>
+	              			
+	            		</ul>
+	            		<div class="tab-content">
+	              			<div class="tab-pane active" id="topNewsTab">
+	                			<h4>Top News</h4>
+	                			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vul</p>
+	              			</div>
+	              			<div class="tab-pane" id="mostRecentTab">
+		              			#{list items:mostRecents, as:'mostRecent'}
+					            <h4>${mostRecent.title}</h4>
+					            <p>${mostRecent.description}</p>
+					            <hr/>
+					            #{/list}
+	              			</div>
+	            		</div>
+	          		</div>
+	          		<br/><br/>
+	          		
+			        
+            	</div>
+        	</div>
+      	</div>  
+    </div>
+		
 
-        <h2>Recent News</h2>
-        Last submitted news are listed here!
-        <ul>
-            #{list items:mostRecents, as:'mostRecent'}
-            <li>${mostRecent.title}</li>
-            #{/list}
-        </ul>
-
-        <!--<h2>Submit Link</h2>
-        Submit new link from <a href="${baseUrl}/share/submit">here</a>!-->
+        
