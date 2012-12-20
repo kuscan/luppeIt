@@ -15,6 +15,29 @@ import play.i18n.Messages;
  * To change this template use File | Settings | File Templates.
  */
 public class LuppeItConstants {
+	
+	/*******************************************************
+	 actions start
+	 *******************************************************/
+	
+	public static final Integer ACTION_ID_VIEW_SHARE = 1;
+	public static final Integer VIEW_SHARE_EP_USER_ID_PARAM = 1;
+	public static final Integer VIEW_SHARE_EP_SHARE_ID_PARAM = 2;
+	
+	public static final Integer ACTION_ID_LUPPE_SHARE = 2;
+	public static final Integer LUPPE_SHARE_EP_USER_ID_PARAM = 3;
+	public static final Integer LUPPE_SHARE_EP_SHARE_ID_PARAM = 4;
+	
+	public static final Integer ACTION_ID_DIG_SHARE = 3;
+	public static final Integer DIG_SHARE_EP_USER_ID_PARAM = 5;
+	public static final Integer DIG_SHARE_EP_SHARE_ID_PARAM = 6;
+	
+	/*******************************************************
+	 actions end
+	 *******************************************************/
+	
+	//default user
+	public static final Integer DEFAULT_USER_ID = 1;
 
     //basic constants
     public static final String BASE_URL = Messages.get("baseUrl");

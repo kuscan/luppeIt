@@ -11,6 +11,9 @@ public class NavigationConstants {
 
     public static final String mainPage = "/main/application/index.html";
     public static final String homePage = "/main/application/home.html";
+    
+    public static final String errorPage500 = "/errors/500.html";
+    public static final String errorPage404 = "/errors/404.html";
 
     public static final String registrationPage = "/registration/register.html";
     public static final String registrationCompletePage = "/registration/registrationComplete.html";
@@ -32,5 +35,9 @@ public class NavigationConstants {
     public static final String adminRssResourcePage = "/admin/rssResource.html";
     public static final String adminCategoriesPage = "/admin/categories.html";
     public static final String adminCategoryPage = "/admin/category.html";
+    
+    public static final String shareNotFoundPage = "/share/shareNotFound.html";
+    public static final String sharePage = "/share/share.html";
+    public static final String originalSharePage = "/share/originalShare.html";
 
 }

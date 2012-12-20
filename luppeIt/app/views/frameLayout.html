@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="not-ie" lang="en">
+<head>
+	<!-- Basic meta tags -->
+	<meta charset="utf-8">
+	<title>${pageTitle}</title>
+		<meta name="description" content="...">
+		<meta name="keywords" content="...">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	
+	<!-- Favicon -->
+	<link href="@{'/public/images/favicon.png'}" rel="icon" type="image/png">
+	
+	<!-- Styles -->
+	#{stylesheet 'main.css' /}
+	#{stylesheet 'styles.css' /}
+	
+	<!-- Font Avesome Styles -->
+	#{stylesheet 'font-awesome/font-awesome.css' /}
+	
+	<!-- FlexSlider Style -->
+	#{stylesheet 'flexslider.css' /}
+	
+	<!-- Web Fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">  
+	<link href="http://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700" rel="stylesheet" type="text/css">
+	
+	#{script 'jquery-1.8.2.min.js' /}
+	#{script 'main.js' /}
+	
+	
+</head>
+<body style="height:100%;">
+	<header id="header" class="fixed-header">
+    <hr class="hr_t">
+		<nav class="navbar">
+			<div class="navbar-inner">
+				<div class="container">
+        			<a class="logo" href="@{main.ApplicationController.index()}"><img src="@{'/public/images/logo-header.png'}" /></a>
+					<ul class="nav">
+						#{if user != null}
+						<li class="dropdown">
+							<a href="">${user.username}</a>
+							<ul>
+								<li><a href="@{login.LoginController.logout}">Logout</a></li>
+							</ul>
+						</li>
+						#{/if}
+						#{else}
+						<li><a href="@{login.LoginController.login()}">Login</a></li>
+						<li><a href="@{registration.RegistrationController.register()}">Registration</a></li>
+						#{/else}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<hr/>
+	</header>
+	
+	#{doLayout /}
+		  
+	<script type="text/javascript" src="@{'/public/javascripts/jquery-1.8.2.min.js'}"></script> 
+	<script type="text/javascript" src="@{'/public/javascripts/bootstrap.min.js'}"></script>  
+	<script type="text/javascript" src="@{'/public/javascripts/functions.js'}"></script>
+	<script type="text/javascript" src="@{'/public/javascripts/jquery.isotope.min.js'}"></script>
+	<script type="text/javascript" defer src="@{'/public/javascripts/jquery.flexslider.js'}"></script>
+
+</body>
+</html>

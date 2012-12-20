@@ -18,12 +18,13 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import controllers.BaseController;
 import database.dao.category.CategoryDAO;
 import database.dao.resource.ResourceDAO;
 import database.dao.rssresource.RssResourceDAO;
 import database.dao.user.UserDAO;
 
-public class AdminController extends Controller {
+public class AdminController extends BaseController {
 
 	@Before
     static void before() {
@@ -32,10 +33,8 @@ public class AdminController extends Controller {
     }
     
     @Before(unless = {"login", "completeLogin"})
-    static void checkAdmin() {
-        if (session.contains("userId") 
-                && session.contains("userType") 
-                && session.get("userType").equals(LuppeItConstants.USER_TYPE_ID_ADMIN.toString())) {
+    static void beforeAdminController() {
+        if (checkAdmin()) {
             renderArgs.put("user", Cache.get("user" + session.get("userId")));
         } else {
             redirect(LuppeItConstants.BASE_URL + "/admin/login");

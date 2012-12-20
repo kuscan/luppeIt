@@ -2,6 +2,7 @@ package controllers.login;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import controllers.BaseController;
 import database.dao.user.UserDAO;
 import models.user.User;
 import play.Logger;
@@ -19,7 +20,7 @@ import java.util.HashMap;
  * Time: 4:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class LoginController extends Controller {
+public class LoginController extends BaseController {
 
     @Before
     static void before() {

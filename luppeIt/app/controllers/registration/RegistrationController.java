@@ -2,6 +2,7 @@ package controllers.registration;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import controllers.BaseController;
 import database.dao.user.UserDAO;
 import models.user.User;
 import models.user.UserConfirmation;
@@ -25,7 +26,7 @@ import java.util.List;
  * Time: 6:38 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RegistrationController extends Controller {
+public class RegistrationController extends BaseController {
 
     @Before
     static void before() {

@@ -1,0 +1,45 @@
+#{extends 'layout.html' /}
+
+    <div class="gradient-1">
+      	<div class="container"> 
+        	<div class="row">
+          		<div class="span8">
+            		<h1><a href="@{share.ShareController.originalShare(share.shareId)}">${share.title}</a> <br/><small>${share.resourceName}</small></h1>
+ 
+		            <article class="blog-post">
+              			<div class="row m-t-30">
+              				<div class="span6">
+	                			${share.lastModifiedDate.asdate('hh:mm dd/MM/yyyy')}
+	                  			<div class="post-title">${share.description}</div>
+	                    		<br><br>
+                    		</div>
+                    		<div class="span2">
+                    			<br/>
+                    			<a href=""><div class="luppe-button"><i class="icon-thumbs-up"></i> Luppe</div></a>
+                    			<a href=""><div class="dig-button"><i class="icon-thumbs-down"></i> Dig</div></a>
+                    		</div>
+              			</div>
+              			<div>
+                			<a href="@{share.ShareController.originalShare(share.shareId)}"><div class="button-class but-2">Read More >></div></a>
+              			</div>		
+              			<hr class="m-tb-40">
+            		</article>
+            	</div>
+            	<div class="span4">
+            		<div class="text-widget">
+		            	<h3>CATEGORY</h3>
+		            	<i>${share.categoryName}</i>
+		            </div>
+		            
+		            <div class="clearfix"></div>
+		            
+		            <div class="categories">
+		            	<h3>TAGS</h3>
+						<div class="button-cat">Human Resources</div>
+		            </div>
+            	</div>
+            </div>
+		</div>
+	</div>
+
+        

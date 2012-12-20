@@ -18,6 +18,10 @@
 *       /login                                  login.LoginController.login
 *       /completeLogin                          login.LoginController.completeLogin
 
+# Share Pages
+*		/share/{shareId}						share.ShareController.share
+*		/originalShare/{shareId}				share.ShareController.originalShare
+
 # Logout
 *       /logout                                 login.LoginController.logout
 

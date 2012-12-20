@@ -31,8 +31,10 @@ public class ShareDAO {
     /*
         Query strings for ShareDAO
      */
-    public static final String QUERY_GET_MOST_RECENT = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date " +
-                                                       "FROM share AS s JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+    public static final String QUERY_GET_MOST_RECENT = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name " +
+                                                       "FROM share AS s " +
+                                                       "JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+                                                       "JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
                                                        "WHERE " +
                                                        "s.share_status_id = 1 AND " +
                                                        "rr.rss_resource_status_id = 1 " +
@@ -40,14 +42,19 @@ public class ShareDAO {
     public static final String QUERY_GET_SHARES_BY_RSS_RESOURCE_ID = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date " +
                                                                      "FROM share AS s WHERE " +
                                                                      "s.rss_resource_id = {RSS_RESOURCE_ID}";
-
     public static final String QUERY_ADD_SHARE = "INSERT INTO share (title,description,content,url,author,luppe_count,dig_count,view_count,category_id,share_status_id,rss_resource_id,user_id,last_modified_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
+    public static final String QUERY_GET_SHARE_BY_SHARE_ID = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
+    													"FROM share AS s " +
+    													"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+    													"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+    													"JOIN category AS c ON rr.category_id = c.category_id " +
+    													"WHERE s.share_id = ?";
+    
     public static List<Share> getMostRecent() {
         try {
         	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
         	ps.setInt(1, MOST_RECENT_LIMIT);
-        	return ShareDAORowMapper.mapShareList(ps.executeQuery());
+        	return ShareDAORowMapper.mapShareListWithResourceName(ps.executeQuery());
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -81,6 +88,17 @@ public class ShareDAO {
 			e.printStackTrace();
 		}
         return false;
+    }
+    
+    public static Share getShareByShareId(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARE_BY_SHARE_ID);
+    		ps.setInt(1, shareId);
+    		return ShareDAORowMapper.mapShareWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 
 }

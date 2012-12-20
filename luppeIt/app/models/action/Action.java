@@ -20,6 +20,7 @@ public class Action extends BaseModel {
 
     private Integer actionId;
     private String actionName;
+    private String methodPath;
 
     public Integer getActionId() {
         return actionId;
@@ -36,4 +37,12 @@ public class Action extends BaseModel {
     public void setActionName(String actionName) {
         this.actionName = actionName;
     }
+
+	public String getMethodPath() {
+		return methodPath;
+	}
+
+	public void setMethodPath(String methodPath) {
+		this.methodPath = methodPath;
+	}
 }

@@ -18,6 +18,9 @@ import java.util.Date;
  */
 public class Share extends BaseModel {
 
+	/*
+	 * Properties on table
+	 */
     private Integer shareId;
     private String title;
     private String description;
@@ -32,6 +35,12 @@ public class Share extends BaseModel {
     private Integer rssResourceId;
     private Integer userId;
     private Long lastModifiedDate;
+    
+    /*
+     * Properties not on table
+     */
+    private String resourceName;
+    private String categoryName;
 
     public boolean equals(Object other) {
         if (this.title.equals(((Share)other).getTitle()) && this.url.equals(((Share)other).getUrl())) {
@@ -151,4 +160,20 @@ public class Share extends BaseModel {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 }

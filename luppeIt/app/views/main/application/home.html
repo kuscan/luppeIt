@@ -1,11 +1,9 @@
 #{extends 'layout.html' /}
 
-	<div id="content">
-
     <div class="gradient-1">
     	<div class="container">
         	<div class="row">
-          		<div class="span12">
+          		<div class="span8">
 	          		<div class="tabbable">
 	           			<ul class="nav nav-tabs">
 	              			<li class="active"><a href="#topNewsTab" data-toggle="tab">Top News</a></li>
@@ -14,21 +12,30 @@
 	            		</ul>
 	            		<div class="tab-content">
 	              			<div class="tab-pane active" id="topNewsTab">
-	                			<h4>Top News</h4>
-	                			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vul</p>
+	                			#{list items:mostRecents, as:'mostRecent'}
+		              			<br/>
+					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
+					            <p>${mostRecent.description}</p>
+					            <i>${mostRecent.resourceName}</i>
+					            <br/><br/>
+					            <hr/>
+					            #{/list}
 	              			</div>
 	              			<div class="tab-pane" id="mostRecentTab">
 		              			#{list items:mostRecents, as:'mostRecent'}
-					            <h4>${mostRecent.title}</h4>
+		              			<br/>
+					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
 					            <p>${mostRecent.description}</p>
+					            <i>${mostRecent.resourceName}</i>
+					            <br/><br/>
 					            <hr/>
 					            #{/list}
 	              			</div>
 	            		</div>
 	          		</div>
 	          		<br/><br/>
-	          		
-			        
+            	</div>
+            	<div class="span4">
             	</div>
         	</div>
       	</div>  

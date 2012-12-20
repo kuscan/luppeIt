@@ -2,6 +2,7 @@ package controllers.main;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
+import controllers.BaseController;
 import database.dao.category.CategoryDAO;
 import database.dao.share.ShareDAO;
 import models.share.Category;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class ApplicationController extends Controller {
+public class ApplicationController extends BaseController {
 
     @Before
     static void before() {
@@ -26,8 +27,8 @@ public class ApplicationController extends Controller {
     }
 
     @Before
-    static void checkLogin() {
-        if (session.contains("userId")) {
+    static void beforeApplicationController() {
+        if (checkLogin()) {
             renderArgs.put("user", Cache.get("user" + session.get("userId")));
         } else {
         }
