@@ -15,8 +15,10 @@
 	                			#{list items:mostRecents, as:'mostRecent'}
 		              			<br/>
 					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
-					            <p>${mostRecent.description}</p>
-					            <i>${mostRecent.resourceName}</i>
+					            #{verbatim}
+					            	<p>${mostRecent.description}</p>
+					            #{/verbatim}
+					            ${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
 					            <br/><br/>
 					            <hr/>
 					            #{/list}
@@ -25,8 +27,10 @@
 		              			#{list items:mostRecents, as:'mostRecent'}
 		              			<br/>
 					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
-					            <p>${mostRecent.description}</p>
-					            <i>${mostRecent.resourceName}</i>
+					            #{verbatim}
+					            	<p>${mostRecent.description}</p>
+					            #{/verbatim}
+					            ${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
 					            <br/><br/>
 					            <hr/>
 					            #{/list}

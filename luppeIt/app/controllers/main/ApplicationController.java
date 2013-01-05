@@ -15,6 +15,7 @@ import play.mvc.Scope;
 import utils.RssReader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

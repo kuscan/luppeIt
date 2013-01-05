@@ -3,7 +3,6 @@ package action;
 import java.util.List;
 
 import config.LuppeItConstants;
-
 import database.dao.action.ActionDAO;
 import database.dao.share.ShareDAO;
 
@@ -13,7 +12,7 @@ import exception.ProvisionException;
 
 import models.action.ActionParameter;
 
-public class ViewShareEndPoint implements ActionEndPointIF {
+public class DigShareEndPoint implements ActionEndPointIF {
 
 	private Integer userId = null;
 	private Integer shareId = null;
@@ -24,26 +23,26 @@ public class ViewShareEndPoint implements ActionEndPointIF {
 		 * Validate parameters
 		 */
 		if (userId == null || shareId == null) {
-			throw new ProvisionException("00000", "ViewShareEndPoint cannot find required parameters for execution!");
+			throw new ProvisionException("00000", "DigShareEndPoint cannot find required parameters for execution!");
 		}
 		
 		/*
 		 * Add user action and parameter values
 		 */
 		try {
-			Long userActionId = ActionDAO.addUserAction(LuppeItConstants.ACTION_ID_VIEW_SHARE, userId);
-			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.VIEW_SHARE_EP_USER_ID_PARAM, userId.toString());
-			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.VIEW_SHARE_EP_SHARE_ID_PARAM, shareId.toString());
-			ShareDAO.updateShareViewCountIncreaseByOne(shareId);
+			Long userActionId = ActionDAO.addUserAction(LuppeItConstants.ACTION_ID_DIG_SHARE, userId);
+			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.DIG_SHARE_EP_USER_ID_PARAM, userId.toString());
+			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.DIG_SHARE_EP_SHARE_ID_PARAM, shareId.toString());
+			ShareDAO.updateShareDigCountIncreaseByOne(shareId);
 			return true;
 		} catch (ProvisionException e) {
 			return false;
 		}
 	}
 
-	public ViewShareEndPoint() { }
+	public DigShareEndPoint() { }
 	
-	public ViewShareEndPoint(Integer userId, Integer shareId) {
+	public DigShareEndPoint(Integer userId, Integer shareId) {
 		this.setUserId(userId);
 		this.setShareId(shareId);
 	}

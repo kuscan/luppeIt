@@ -31,10 +31,11 @@ public class ShareDAO {
     /*
         Query strings for ShareDAO
      */
-    public static final String QUERY_GET_MOST_RECENT = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name " +
+    public static final String QUERY_GET_MOST_RECENT = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
                                                        "FROM share AS s " +
                                                        "JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
                                                        "JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
+                                                       "JOIN category as c ON s.category_id = c.category_id " +
                                                        "WHERE " +
                                                        "s.share_status_id = 1 AND " +
                                                        "rr.rss_resource_status_id = 1 " +
@@ -49,12 +50,17 @@ public class ShareDAO {
     													"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
     													"JOIN category AS c ON rr.category_id = c.category_id " +
     													"WHERE s.share_id = ?";
+    public static final String QUERY_UPDATE_SHARE_VIEW_COUNT_INCREASE_BY_ONE = "UPDATE share SET view_count = view_count + 1 WHERE share_id = ?";
+    public static final String QUERY_UPDATE_SHARE_LUPPE_COUNT_INCREASE_BY_ONE = "UPDATE share SET luppe_count = luppe_count + 1 WHERE share_id = ?";
+    public static final String QUERY_UPDATE_SHARE_DIG_COUNT_INCREASE_BY_ONE = "UPDATE share SET dig_count = dig_count + 1 WHERE share_id = ?";
+    public static final String QUERY_UPDATE_SHARE_LUPPE_COUNT_DECREASE_BY_ONE = "UPDATE share SET luppe_count = luppe_count - 1 WHERE share_id = ?";
+    public static final String QUERY_UPDATE_SHARE_DIG_COUNT_DECREASE_BY_ONE = "UPDATE share SET dig_count = dig_count - 1 WHERE share_id = ?";
     
     public static List<Share> getMostRecent() {
         try {
         	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
         	ps.setInt(1, MOST_RECENT_LIMIT);
-        	return ShareDAORowMapper.mapShareListWithResourceName(ps.executeQuery());
+        	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -99,6 +105,61 @@ public class ShareDAO {
     		e.printStackTrace();
     	}
     	return null;
+    }
+    
+    public static boolean updateShareViewCountIncreaseByOne(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_SHARE_VIEW_COUNT_INCREASE_BY_ONE);
+    		ps.setInt(1, shareId);
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
+    
+    public static boolean updateShareLuppeCountIncreaseByOne(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_SHARE_LUPPE_COUNT_INCREASE_BY_ONE);
+    		ps.setInt(1, shareId);
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
+    
+    public static boolean updateShareDigCountIncreaseByOne(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_SHARE_DIG_COUNT_INCREASE_BY_ONE);
+    		ps.setInt(1, shareId);
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
+    
+    public static boolean updateShareLuppeCountDecreaseByOne(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_SHARE_LUPPE_COUNT_DECREASE_BY_ONE);
+    		ps.setInt(1, shareId);
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
+    
+    public static boolean updateShareDigCountDecreaseByOne(Integer shareId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_SHARE_DIG_COUNT_DECREASE_BY_ONE);
+    		ps.setInt(1, shareId);
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return false;
     }
 
 }

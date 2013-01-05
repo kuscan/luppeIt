@@ -120,5 +120,35 @@ public class ShareDAORowMapper {
         }
         return null;
     }
+    
+    public static List<Share> mapShareListWithDetails(ResultSet rs) {
+        try {
+            List<Share> shares = new ArrayList<Share>();
+            while (rs.next()) {
+                Share share = new Share();
+                share.setShareId(rs.getInt(SHARE_ID_COLUMN));
+                share.setTitle(rs.getString(TITLE_COLUMN));
+                share.setDescription(rs.getString(DESCRIPTION_COLUMN));
+                share.setContent(rs.getString(CONTENT_COLUMN));
+                share.setUrl(rs.getString(URL_COLUMN));
+                share.setAuthor(rs.getString(AUTHOR_COLUMN));
+                share.setLuppeCount(rs.getInt(LUPPE_COUNT_COLUMN));
+                share.setDigCount(rs.getInt(DIG_COUNT_COLUMN));
+                share.setViewCount(rs.getInt(VIEW_COUNT_COLUMN));
+                share.setCategoryId(rs.getInt(CATEGORY_ID_COLUMN));
+                share.setShareStatusId(rs.getInt(SHARE_STATUS_ID_COLUMN));
+                share.setRssResourceId(rs.getInt(RSS_RESOURCE_ID_COLUMN));
+                share.setUserId(rs.getInt(USER_ID_COLUMN));
+                share.setLastModifiedDate(rs.getLong(LAST_MODIFIED_DATE_COLUMN));
+                share.setResourceName(rs.getString(RESOURCE_NAME_COLUMN));
+                share.setCategoryName(rs.getString(CATEGORY_NAME_COLUMN));
+                shares.add(share);
+            }
+            return shares;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

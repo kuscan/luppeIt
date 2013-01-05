@@ -2,6 +2,9 @@ package controllers.share;
 
 import java.util.HashMap;
 
+import action.CheckUserActionEndPoint;
+import action.DigShareEndPoint;
+import action.LuppeShareEndPoint;
 import action.ViewShareEndPoint;
 
 import models.share.Share;
@@ -42,24 +45,23 @@ public class ShareController extends BaseController {
     }
     
     public static void share(Integer shareId) {
-    	if (session.contains("userId")) {
-            try {
-            	ViewShareEndPoint ep = new ViewShareEndPoint(Integer.parseInt(session.get("userId")), shareId);
-				ep.go();
+    	/*
+    	 * view share action
+    	 */
+    	viewShare(shareId);
+    	if (checkLogin()) {
+    		try {
+		    	Integer userId = Integer.parseInt(session.get("userId"));
+		    	
+		    	CheckUserActionEndPoint ep = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_LUPPE_SHARE, userId, shareId);
+				renderArgs.put("isLupped", ep.go());
+				
+				ep = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_DIG_SHARE, userId, shareId);
+				renderArgs.put("isDigged", ep.go());
 			} catch (ProvisionException e) {
-				e.printStackTrace();
-				render(NavigationConstants.errorPage500);
+				Logger.error(e, "ProvisionException caught!");
 			}
-        } else {
-        	try {
-            	ViewShareEndPoint ep = new ViewShareEndPoint(LuppeItConstants.DEFAULT_USER_ID, shareId);
-				ep.go();
-			} catch (ProvisionException e) {
-				e.printStackTrace();
-				render(NavigationConstants.errorPage500);
-			}
-        }
-    	
+    	}
     	
     	HashMap<String, String> arguments = new HashMap<String, String>();
     	
@@ -84,6 +86,86 @@ public class ShareController extends BaseController {
     	}
     	
     	renderTemplate(NavigationConstants.originalSharePage, arguments);
+    }
+    
+    private static void viewShare(Integer shareId) {
+    	if (session.contains("userId")) {
+            try {
+            	ViewShareEndPoint ep = new ViewShareEndPoint(Integer.parseInt(session.get("userId")), shareId);
+				ep.go();
+			} catch (ProvisionException e) {
+				e.printStackTrace();
+				render(NavigationConstants.errorPage500);
+			}
+        } else {
+        	try {
+            	ViewShareEndPoint ep = new ViewShareEndPoint(LuppeItConstants.DEFAULT_USER_ID, shareId);
+				ep.go();
+			} catch (ProvisionException e) {
+				e.printStackTrace();
+				render(NavigationConstants.errorPage500);
+			}
+        }
+    }
+    
+    public static void luppeShare(Integer shareId) {
+    	if (checkLogin()) {
+            try {
+            	Integer userId = Integer.parseInt(session.get("userId"));
+            	
+            	/*
+            	 * If user did not luppe the share before, luppe it. Otherwise return failure.
+            	 */
+            	CheckUserActionEndPoint checkUserActionEndPoint = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_LUPPE_SHARE, userId, shareId);
+            	if (!checkUserActionEndPoint.go()) {
+            		
+            		/*
+            		 * If user digged the share before, undo it. Then luppe the share.
+            		 */
+            		checkUserActionEndPoint = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_DIG_SHARE, userId, shareId, true);
+            		checkUserActionEndPoint.go();
+            		
+	            	LuppeShareEndPoint ep = new LuppeShareEndPoint(userId, shareId);
+					ep.go();
+					renderText("Success");
+            	}
+			} catch (ProvisionException e) {
+				e.printStackTrace();
+				renderText("Failure");
+			}
+        } else {
+        	renderText("Failure");
+        }
+    }
+    
+    public static void digShare(Integer shareId) {
+    	if (checkLogin()) {
+            try {
+            	Integer userId = Integer.parseInt(session.get("userId"));
+            	
+            	/*
+            	 * If user did not dig the share before, dig it. Otherwise return failure.
+            	 */
+            	CheckUserActionEndPoint checkUserActionEndPoint = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_DIG_SHARE, userId, shareId);
+            	if (!checkUserActionEndPoint.go()) {
+            		
+            		/*
+            		 * If user lupped the share before, undo it. Then dig the share.
+            		 */
+            		checkUserActionEndPoint = new CheckUserActionEndPoint(LuppeItConstants.ACTION_ID_LUPPE_SHARE, userId, shareId, true);
+            		checkUserActionEndPoint.go();
+            		
+	            	DigShareEndPoint ep = new DigShareEndPoint(Integer.parseInt(session.get("userId")), shareId);
+					ep.go();
+					renderText("Success");
+            	}
+			} catch (ProvisionException e) {
+				e.printStackTrace();
+				renderText("Failure");
+			}
+        } else {
+        	renderText("Failure");
+        }
     }
 
 

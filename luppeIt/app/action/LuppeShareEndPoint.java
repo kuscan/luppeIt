@@ -2,6 +2,10 @@ package action;
 
 import java.util.List;
 
+import config.LuppeItConstants;
+import database.dao.action.ActionDAO;
+import database.dao.share.ShareDAO;
+
 import play.Logger;
 
 import exception.ProvisionException;
@@ -22,9 +26,18 @@ public class LuppeShareEndPoint implements ActionEndPointIF {
 			throw new ProvisionException("00000", "LuppeShareEndPoint cannot find required parameters for execution!");
 		}
 		
-		
-		
-		return false;
+		/*
+		 * Add user action and parameter values
+		 */
+		try {
+			Long userActionId = ActionDAO.addUserAction(LuppeItConstants.ACTION_ID_LUPPE_SHARE, userId);
+			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.LUPPE_SHARE_EP_USER_ID_PARAM, userId.toString());
+			ActionDAO.addUserActionParameterValue(userActionId, LuppeItConstants.LUPPE_SHARE_EP_SHARE_ID_PARAM, shareId.toString());
+			ShareDAO.updateShareLuppeCountIncreaseByOne(shareId);
+			return true;
+		} catch (ProvisionException e) {
+			return false;
+		}
 	}
 
 	public LuppeShareEndPoint() { }

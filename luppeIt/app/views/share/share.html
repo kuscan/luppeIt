@@ -10,13 +10,42 @@
               			<div class="row m-t-30">
               				<div class="span6">
 	                			${share.lastModifiedDate.asdate('hh:mm dd/MM/yyyy')}
-	                  			<div class="post-title">${share.description}</div>
+	                			#{verbatim}
+	                  				<div class="post-title">${share.description}</div>
+	                  			#{/verbatim}
 	                    		<br><br>
                     		</div>
                     		<div class="span2">
-                    			<br/>
-                    			<a href=""><div class="luppe-button"><i class="icon-thumbs-up"></i> Luppe</div></a>
-                    			<a href=""><div class="dig-button"><i class="icon-thumbs-down"></i> Dig</div></a>
+                    			<div class="count-container">
+                    				<div class="luppe-count">
+                    					<i class="icon-thumbs-up"></i> ${share.luppeCount}
+                    				</div>
+									<div class="dig-count">
+                    					<i class="icon-thumbs-down"></i> ${share.digCount}
+                    				</div>
+                    			</div>
+                    			#{if isLupped != null && isDigged != null}
+	                    			#{if isLupped == false}
+	                    			<div id="luppeButton${share.shareId}">
+	                    				<a onclick="luppeShare(${share.shareId})"><div class="luppe-button"><i class="icon-thumbs-up"></i> Luppe</div></a>
+	                    			</div>
+	                    			#{/if}
+	                    			#{else}
+	                    			<div id="luppeButton${share.shareId}">
+	                    				<div class="lupped-button"><i class="icon-thumbs-up"></i> Lupped</div>
+	                    			</div>
+	                    			#{/else}
+	                    			#{if isDigged == false}
+	                    			<div id="digButton${share.shareId}">
+	                    				<a onclick="digShare(${share.shareId})"><div class="dig-button"><i class="icon-thumbs-down"></i> Dig</div></a>
+	                    			</div>
+	                    			#{/if}
+	                    			#{else}
+	                    			<div id="digButton${share.shareId}">
+	                    				<div class="digged-button"><i class="icon-thumbs-down"></i> Digged</div>
+	                    			</div>
+	                    			#{/else}
+                    			#{/if}
                     		</div>
               			</div>
               			<div>

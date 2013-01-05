@@ -21,6 +21,8 @@
 # Share Pages
 *		/share/{shareId}						share.ShareController.share
 *		/originalShare/{shareId}				share.ShareController.originalShare
+*		/luppeShare								share.ShareController.luppeShare
+*		/digShare								share.ShareController.digShare
 
 # Logout
 *       /logout                                 login.LoginController.logout
