@@ -1,14 +1,16 @@
 $(document).ready(function() {
 
-    $('input[name=tag]').keyup(function() {
-        clearTimeout($.data(this, 'timer'));
-        var wait = setTimeout(search, 1000);
-        $(this).data('timer', wait);
-    });
-
-    function search() {
-        alert($('input[name=tag]').val());
-    }
+	$("#selectAll").bind('click', function(){
+		$('#userCategories').each(function(){
+			$('#userCategories option').prop("selected", true);
+		});
+	});
+	
+	$("#deselectAll").bind('click', function(){
+		$('#userCategories').each(function(){
+			$('#userCategories option').prop("selected", false);
+		});
+	});
     
 });
 

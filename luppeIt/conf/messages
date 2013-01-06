@@ -19,6 +19,7 @@ registration.passwordConfirmationRequiredMessage=[Password confirmation is requi
 registration.passwordConfirmationMatchErrorMessage=[Password confirmation does not match with password!]
 registration.emailAlreadyExistsErrorMessage=[This e-mail is already used by another user!]
 regsitration.confirmationCodeNotFoundErrorMessage=Confirmation link you clicked is not valid! Please click on the link that we sent to your e-mail address!
+registration.userCategoryRequiredErrorMessage=[You must select at least one category!]
 
 #login page
 login.wrongUsernamePasswordErrorMessage=Wrong username or password!

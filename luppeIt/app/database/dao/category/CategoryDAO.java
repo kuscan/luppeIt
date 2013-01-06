@@ -24,6 +24,7 @@ public class CategoryDAO {
     public static final String QUERY_DELETE_CATEGORY = "DELETE FROM category WHERE category_id = ?";
     public static final String QUERY_GET_ALL_CATEGORY_STATUSES = "SELECT category_status_id, category_status_name FROM category_status";
     public static final String QUERY_GET_CATEGORY_BY_CATEGORY_ID = "SELECT category_id, category_name, category_status_id FROM category WHERE category_id = ?";
+    public static final String QUERY_ADD_USER_CATEGORY = "INSERT INTO user_category (user_id,category_id) VALUES (?,?)";
     
     public static List<Category> getAllCategoriesOrderByName() {
         return CategoryDAORowMapper.mapCategoryList(DB.executeQuery(QUERY_GET_ALL_CATEGORIES_ORDER_BY_NAME));
@@ -84,5 +85,19 @@ public class CategoryDAO {
     		e.printStackTrace();
     	}
     	return null;
+    }
+    
+    public static void addUserCategories(Long userId, List<Integer> userCategories) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_ADD_USER_CATEGORY);
+    		for (Integer userCategoryId: userCategories) {
+    			ps.setLong(1, userId);
+    			ps.setInt(2, userCategoryId);
+    			ps.addBatch();
+    		}
+    		ps.executeBatch();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
     }
 }

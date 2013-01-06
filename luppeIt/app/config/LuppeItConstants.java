@@ -81,6 +81,7 @@ public class LuppeItConstants {
     public static final String PASSWORD_CONFIRMATION_MATCH_ERROR_MESSAGE = Messages.get("registration.passwordConfirmationMatchErrorMessage");
     public static final String EMAIL_ALREADY_EXISTS_ERROR_MESSAGE = Messages.get("registration.emailAlreadyExistsErrorMessage");
     public static final String CONFIRMATION_CODE_NOT_FOUND_ERROR = Messages.get("regsitration.confirmationCodeNotFoundErrorMessage");
+    public static final String USER_CATEGORY_REQUIRED_ERROR_MESSAGE = Messages.get("registration.userCategoryRequiredErrorMessage");
 
     //login page error messages
     public static final String WRONG_USERNAME_PASSWORD_ERROR_MESSAGE = Messages.get("login.wrongUsernamePasswordErrorMessage");

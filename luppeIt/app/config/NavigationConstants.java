@@ -24,6 +24,8 @@ public class NavigationConstants {
     public static final String submitLinkPage = "/share/submit.html";
     public static final String submitLinkCompletePage = "/share/submitComplete.html";
     
+    public static final String profilePage = "/profile/profile.html";
+    
     
     
     

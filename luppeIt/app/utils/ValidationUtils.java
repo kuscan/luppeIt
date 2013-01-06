@@ -20,6 +20,7 @@ public class ValidationUtils {
     public static boolean validateEmail(String email) {
         try {
             InternetAddress address = new InternetAddress(email, true);
+            address.getAddress();
             return true;
         }
         catch (AddressException e) {

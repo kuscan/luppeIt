@@ -3,12 +3,15 @@ package controllers.registration;
 import config.LuppeItConstants;
 import config.NavigationConstants;
 import controllers.BaseController;
+import database.dao.category.CategoryDAO;
 import database.dao.user.UserDAO;
+import models.share.Category;
 import models.user.User;
 import models.user.UserConfirmation;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.mail.EmailException;
 import play.Logger;
+import play.db.jpa.Transactional;
 import play.mvc.Before;
 import play.mvc.Controller;
 import utils.MailSender;
@@ -37,15 +40,20 @@ public class RegistrationController extends BaseController {
     public static void register() {
         HashMap<String, String> arguments = new HashMap<String, String>();
         arguments.put("emailValue", "");
+        
+        List<Category> categories = CategoryDAO.getAllCategoriesOrderByName();
+        renderArgs.put("categories", categories);
 
         renderTemplate(NavigationConstants.registrationPage, arguments);
     }
 
+    @Transactional
     public static void completeRegistration(String email,
                                             String password,
-                                            String passwordConfirmation) {
+                                            String passwordConfirmation,
+                                            List<Integer> userCategories) {
 
-        boolean hasError = false;
+    	boolean hasError = false;
 
         HashMap<String, String> arguments = new HashMap<String, String>();
         arguments.put("emailValue", email);
@@ -78,7 +86,12 @@ public class RegistrationController extends BaseController {
             arguments.put("passwordConfirmationMatchError", LuppeItConstants.PASSWORD_CONFIRMATION_MATCH_ERROR_MESSAGE);
             hasError = true;
         }
+        if (userCategories == null || userCategories.size() < 1) {
+        	arguments.put("userCategoryError", LuppeItConstants.USER_CATEGORY_REQUIRED_ERROR_MESSAGE);
+        	hasError = true;
+        }
         if (hasError) {
+        	renderArgs.put("categories", CategoryDAO.getAllCategoriesOrderByName());
             renderTemplate(NavigationConstants.registrationPage, arguments);
         }
 
@@ -102,13 +115,17 @@ public class RegistrationController extends BaseController {
             e.printStackTrace();
         }
 
-
+        /*
+         * Add user confirmation
+         */
         UserConfirmation userConfirmation = new UserConfirmation();
         userConfirmation.setEmail(email);
         userConfirmation.setConfirmationCode(confirmationCode);
         UserDAO.addUserConfirmation(userConfirmation);
 
-
+        /*
+         * Add user
+         */
         User user = new User();
         user.setUsername(email);
         user.setPassword(password);
@@ -118,7 +135,12 @@ public class RegistrationController extends BaseController {
         user.setUserStatusId(LuppeItConstants.USER_STATUS_ID_REGISTERED);
         user.setCountryId(LuppeItConstants.COUNTRY_ID_DEFAULT);
         user.setUserTypeId(LuppeItConstants.USER_TYPE_ID_DEFAULT);
-        UserDAO.addUser(user);
+        Long userId = UserDAO.addUser(user);
+        
+        /*
+         * Add user categories
+         */
+        CategoryDAO.addUserCategories(userId, userCategories);
 
         renderTemplate(NavigationConstants.registrationCompletePage, arguments);
 

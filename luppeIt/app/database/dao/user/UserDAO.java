@@ -4,7 +4,10 @@ import models.user.User;
 import models.user.UserConfirmation;
 import play.db.DB;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ public class UserDAO {
     public static final String QUERY_GET_USER_CONFIRMATIONS_BY_CONFIRMATION_CODE = "SELECT email, confirmation_code FROM user_confirmation WHERE confirmation_code = '{confirmation_code}'";
 
     public static final String QUERY_ADD_USER_CONFIRMATION = "INSERT INTO user_confirmation (email, confirmation_code) VALUES ('{email}','{confirmation_code}')";
-    public static final String QUERY_ADD_USER = "INSERT INTO user (username, password, email, age, trust, user_status_id, country_id, user_type_id) VALUES ('{username}','{password}','{email}','{age}','{trust}','{user_status_id}','{country_id}','{user_type_id}')";
+    public static final String QUERY_ADD_USER = "INSERT INTO user (username, password, email, age, trust, user_status_id, country_id, user_type_id) VALUES (?,?,?,?,?,?,?,?)";
 
     public static final String QUERY_UPDATE_USER_STATUS_BY_EMAIL = "UPDATE user SET user_status_id = {user_status_id} WHERE email = '{email}'";
 
@@ -50,17 +53,26 @@ public class UserDAO {
         return DB.execute(query);
     }
 
-    public static boolean addUser(User user) {
-        String query = QUERY_ADD_USER
-                       .replace("{username}", user.getUsername())
-                       .replace("{password}", user.getPassword())
-                       .replace("{email}", user.getEmail())
-                       .replace("{age}", user.getAge().toString())
-                       .replace("{trust}", user.getTrust().toString())
-                       .replace("{user_status_id}", user.getUserStatusId().toString())
-                       .replace("{country_id}", user.getCountryId().toString())
-                       .replace("{user_type_id}", user.getUserTypeId().toString());
-        return DB.execute(query);
+    public static Long addUser(User user) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_ADD_USER, Statement.RETURN_GENERATED_KEYS);
+    		ps.setString(1, user.getUsername());
+    		ps.setString(2, user.getPassword());
+    		ps.setString(3, user.getEmail());
+    		ps.setInt(4, user.getAge());
+    		ps.setInt(5, user.getTrust());
+    		ps.setInt(6, user.getUserStatusId());
+    		ps.setInt(7, user.getCountryId());
+    		ps.setInt(8, user.getUserTypeId());
+    		ps.executeUpdate();
+    		
+    		ResultSet keys = ps.getGeneratedKeys();
+    		keys.next();
+    		
+    		return keys.getLong(1);
+    	} catch (SQLException e) {
+    		return null;
+    	}
     }
 
     public static List<UserConfirmation> getUserConfirmationsByConfirmationCode(String confirmationCode) {

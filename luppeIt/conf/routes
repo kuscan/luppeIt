@@ -27,6 +27,10 @@
 # Logout
 *       /logout                                 login.LoginController.logout
 
+# Profile
+*		/profile								profile.ProfileController.profile
+
+# Administration
 *		/admin									admin.AdminController.index
 *		/admin/login							admin.AdminController.login
 *		/admin/completeLogin					admin.AdminController.completeLogin

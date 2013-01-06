@@ -57,6 +57,23 @@
 			            #{/field}
 			        </p>
 			        <p>
+			        	#{field 'userCategories'}
+			        	<label>Categories you are interested in:</label>
+			        	<select name="${field.name}" id="userCategories" multiple="multiple" size="10">
+			        		#{list items:categories, as:'category'}
+			        			<option value="${category.categoryId}">${category.categoryName}</option>
+			        		#{/list}
+			        	</select>
+			        	#{if arguments.userCategoryError != null}
+			            <span class="error">
+			                ${arguments.userCategoryError}
+			            </span>
+			            #{/if}
+			        	<div id="selectAll" style="float:left;">Select All </div> <div id="deselectAll" style="float:left;margin-left:10px;"> Deselect All</div>
+			        	<br/>
+			        	#{/field}
+			        </p>
+			        <p>
 			            <input type="submit" value="Register!" />
 			            #{if arguments.emailAlreadyExistsError != null}
 			            <span class="error">
