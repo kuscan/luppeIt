@@ -24,11 +24,17 @@
 *		/luppeShare								share.ShareController.luppeShare
 *		/digShare								share.ShareController.digShare
 
+# Category Pages
+*		/categories								category.CategoryController.categories
+*		/category/{categoryId}					category.CategoryController.category
+
 # Logout
 *       /logout                                 login.LoginController.logout
 
 # Profile
 *		/profile								profile.ProfileController.profile
+*		/updateProfile							profile.ProfileController.updateProfile
+*		/updateUserCategories					profile.ProfileController.updateUserCategories
 
 # Administration
 *		/admin									admin.AdminController.index

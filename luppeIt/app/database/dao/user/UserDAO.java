@@ -28,6 +28,8 @@ public class UserDAO {
 
     public static final String QUERY_UPDATE_USER_STATUS_BY_EMAIL = "UPDATE user SET user_status_id = {user_status_id} WHERE email = '{email}'";
 
+    public static final String QUERY_UPDATE_USER = "UPDATE user SET username = ?, password = ?, email = ?, age = ?, trust = ?, user_status_id = ?, country_id = ?, user_type_id = ? WHERE user_id = ?";
+    
     public static User getUserByEmailAndPassword(String email, String password) {
         String query = QUERY_GET_USER_BY_EMAIL_AND_PASSWORD
                        .replace("{email}", email)
@@ -86,5 +88,23 @@ public class UserDAO {
                        .replace("{user_status_id}", userStatusId.toString())
                        .replace("{email}", email);
         return DB.execute(query);
+    }
+    
+    public static boolean updateUser(User user) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_UPDATE_USER);
+    		ps.setString(1, user.getUsername());
+    		ps.setString(2, user.getPassword());
+    		ps.setString(3, user.getEmail());
+    		ps.setInt(4, user.getAge());
+    		ps.setInt(5, user.getTrust());
+    		ps.setInt(6, user.getUserStatusId());
+    		ps.setInt(7, user.getCountryId());
+    		ps.setInt(8, user.getUserTypeId());
+    		ps.setInt(9, user.getUserId());
+    		return ps.execute();
+    	} catch (SQLException e) {
+    		return false;
+    	}
     }
 }

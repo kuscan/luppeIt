@@ -3,92 +3,136 @@
 	<div class="gradient-1">
       	<div class="container"> 
         	<div class="row">
-          		<div class="span8">
+          		<div class="span6">
           			<h2>Profile</h2>
-			        #{form @profile.ProfileController.updateProfile(), method:'POST', id:'updateProfileForm'}
-			        <p>
-			            #{field 'username'}
-			            <label>Username:</label>
-			            <input type="text" name="${field.name}" value="${user.username}" />
-			            #{if arguments.usernameError != null}
-			            <span class="error">
-			                ${arguments.usernameError}
-			            </span>
+          			<div class="hero-unit">
+				        #{form @profile.ProfileController.updateProfile(), method:'POST', id:'updateProfileForm'}
+			        	#{if arguments.updateError == "Profile information successfully updated."}
+			            <div class="alert alert-success">
+			            	<button type="button" class="close" data-dismiss="alert">×</button>
+			            	${arguments.updateError}
+			          	</div>
 			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'password'}
-			            <label>Password:</label>
-			            <input type="password" name="${field.name}" value="${user.password}"/>
-			            #{if arguments.passwordError != null}
-			            <span class="error">
-			                ${arguments.passwordError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'email'}
-			            <label>E-mail:</label>
-			            <input type="text" name="${field.name}" value="${user.email}" disabled />
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'age'}
-			            <label>Age:</label>
-			            <input type="text" name="${field.name}" value="${user.age}" />
-			            #{if arguments.ageError != null}
-			            <span class="error">
-			                ${arguments.ageError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'trust'}
-			            <label>Luppe Point:</label>
-			            <input type="text" name="${field.name}" value="${user.trust}" disabled />
-			            #{if arguments.trustError != null}
-			            <span class="error">
-			                ${arguments.trustError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'country'}
-			            <label>Country:</label>
-			            <select name="${field.name}">
-			            	#{list items:countries, as:'country'}
-				            	#{if user.countryId == country.countryId}
-				            		<option value="${country.countryId}" selected="selected">${country.countryName}</option>
-				            	#{/if}
-				            	#{else}
-				            		<option value="${country.countryId}">${country.countryName}</option>
-				            	#{/else}
-			            	#{/list}
-			            </select>
-			            #{if arguments.countryError != null}
-			            <span class="error">
-			                ${arguments.countryError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            <input type="submit" value="Update!" />
-			            #{if arguments.updateError != null}
-			            <span class="error">
-			                ${arguments.updateError}
-			            </span>
-			            #{/if}
-			        </p>
-			        #{/form}
-            		
+			        	#{elseif arguments.updateError != null}
+			            <div class="alert alert-error">
+			            	<button type="button" class="close" data-dismiss="alert">×</button>
+			            	${arguments.updateError}
+			          	</div>
+			            #{/elseif}
+				        <p>
+				            #{field 'username'}
+				            <label>Username:</label>
+				            <input type="text" name="${field.name}" value="${user.username}" />
+				            #{if arguments.usernameError != null}
+				            <span class="error">
+				                ${arguments.usernameError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'password'}
+				            <label>Password:</label>
+				            <input type="password" name="${field.name}" value="${user.password}"/>
+				            #{if arguments.passwordError != null}
+				            <span class="error">
+				                ${arguments.passwordError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'email'}
+				            <label>E-mail:</label>
+				            <input type="text" name="${field.name}" value="${user.email}" disabled />
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'age'}
+				            <label>Age:</label>
+				            <input type="text" name="${field.name}" value="${user.age}" />
+				            #{if arguments.ageError != null}
+				            <span class="error">
+				                ${arguments.ageError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'trust'}
+				            <label>Luppe Point:</label>
+				            <input type="text" name="${field.name}" value="${user.trust}" disabled />
+				            #{if arguments.trustError != null}
+				            <span class="error">
+				                ${arguments.trustError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'country'}
+				            <label>Country:</label>
+				            <select name="${field.name}">
+				            	#{list items:countries, as:'country'}
+					            	#{if user.countryId == country.countryId}
+					            		<option value="${country.countryId}" selected="selected">${country.countryName}</option>
+					            	#{/if}
+					            	#{else}
+					            		<option value="${country.countryId}">${country.countryName}</option>
+					            	#{/else}
+				            	#{/list}
+				            </select>
+				            #{if arguments.countryError != null}
+				            <span class="error">
+				                ${arguments.countryError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            <input type="submit" value="Update!" />
+				        </p>
+				        #{/form}
+            		</div>
             	</div>
-            	<div class="span4">
-            		
+            	<div class="span6">
+            		<h2>Your Categories</h2>
+          			<div class="hero-unit">
+          				#{form @profile.ProfileController.updateUserCategories(), method:'POST', id:'updateUserCategoriesForm'}
+          				#{if arguments.userCategoryError == "User categories successfully updated."}
+			            <div class="alert alert-success">
+			            	<button type="button" class="close" data-dismiss="alert">×</button>
+			            	${arguments.userCategoryError}
+			          	</div>
+			            #{/if}
+			        	#{elseif arguments.userCategoryError != null}
+			            <div class="alert alert-error">
+			            	<button type="button" class="close" data-dismiss="alert">×</button>
+			            	${arguments.userCategoryError}
+			          	</div>
+			            #{/elseif}
+          				<p>
+				        	#{field 'userCategories'}
+				        	<label>Categories you are interested in:</label>
+				        	<select name="${field.name}" id="userCategories" multiple="multiple" size="10">
+				        		#{list items:categories, as:'category'}
+				        			#{if interests.contains(category.categoryId)}
+				        				<option value="${category.categoryId}" selected>${category.categoryName}</option>
+				        			#{/if}
+				        			#{else}
+				        				<option value="${category.categoryId}">${category.categoryName}</option>
+				        			#{/else}
+				        		#{/list}
+				        	</select>
+				        	<div id="selectAll" style="float:left;">Select All </div> <div id="deselectAll" style="float:left;margin-left:10px;"> Deselect All</div>
+				        	<br/>
+				        	#{/field}
+				        </p>
+          				<p>
+				            <input type="submit" value="Update!" />
+				        </p>
+          				#{/form}
+          			</div>
             	</div>
             </div>
 		</div>

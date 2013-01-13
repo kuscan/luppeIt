@@ -7,6 +7,10 @@ import play.mvc.Controller;
 
 public class BaseController extends Controller {
 
+	public static Integer getUserId() {
+		return Integer.parseInt(session.get("userId"));
+	}
+	
 	public static Boolean checkLogin() {
 		if (session.contains("userId") && Cache.get("user" + session.get("userId")) != null) {
 			Logger.info("User is logged in! User id: " + session.get("userId"));

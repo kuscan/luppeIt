@@ -4,15 +4,17 @@
       	<div class="container"> 
         	<div class="row">
           		<div class="span8">
-          			#{if arguments.confirmationError != null}
-			            <h1>Confirmation Error</h1>
-			            ${arguments.confirmationError}
-			        #{/if}
-			        #{else}
-			            <h1>Welcome to LuppeIt!</h1>
-			            You can login and start lupping from <a href="${baseUrl}/login">here</a>.
-			        #{/else}
-			        <br/>
+          			<div class="hero-unit">
+	          			#{if arguments.confirmationError != null}
+				            <h2>Confirmation Error</h2>
+				            ${arguments.confirmationError}
+				        #{/if}
+				        #{else}
+				            <h2>Welcome to LuppeIt!</h2>
+				            You can login and start lupping from <a href="${baseUrl}/login">here</a>.
+				        #{/else}
+				        <br/>
+			        </div>
             	</div>
             	<div class="span4">
             		

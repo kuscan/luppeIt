@@ -76,9 +76,9 @@ public class ApplicationController extends BaseController {
         /*
             Get all categories and inject into view
          */
-        List<Category> categories = CategoryDAO.getAllCategoriesOrderByName();
+        List<Category> categories = CategoryDAO.getActiveUserCategories(Integer.parseInt(session.get("userId")));
         renderArgs.put("categories", categories);
-
+        
         /*
             Get top news and inject into view
          */

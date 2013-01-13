@@ -4,10 +4,13 @@ import models.share.Category;
 import models.share.Resource;
 import models.status.CategoryStatus;
 import play.db.DB;
+import play.db.jpa.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import config.LuppeItConstants;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +28,8 @@ public class CategoryDAO {
     public static final String QUERY_GET_ALL_CATEGORY_STATUSES = "SELECT category_status_id, category_status_name FROM category_status";
     public static final String QUERY_GET_CATEGORY_BY_CATEGORY_ID = "SELECT category_id, category_name, category_status_id FROM category WHERE category_id = ?";
     public static final String QUERY_ADD_USER_CATEGORY = "INSERT INTO user_category (user_id,category_id) VALUES (?,?)";
+    public static final String QUERY_GET_ACTIVE_USER_CATEGORIES = "SELECT category_id, category_name, category_status_id FROM category WHERE category_id IN (SELECT category_id FROM user_category WHERE user_id = ?) AND category_status_id = ? ORDER BY category_name";
+    public static final String QUERY_DELETE_USER_CATEGORIES = "DELETE FROM user_category WHERE user_id = ?";
     
     public static List<Category> getAllCategoriesOrderByName() {
         return CategoryDAORowMapper.mapCategoryList(DB.executeQuery(QUERY_GET_ALL_CATEGORIES_ORDER_BY_NAME));
@@ -99,5 +104,30 @@ public class CategoryDAO {
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
+    }
+    
+    @Transactional
+    public static void updateUserCategories(Long userId, List<Integer> userCategories) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_DELETE_USER_CATEGORIES);
+    		ps.setLong(1, userId);
+    		ps.execute();
+    		
+    		addUserCategories(userId, userCategories);
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    public static List<Category> getActiveUserCategories(Integer userId) {
+    	try {
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_ACTIVE_USER_CATEGORIES);
+    		ps.setInt(1, userId);
+    		ps.setInt(2, LuppeItConstants.CATEGORY_STATUS_ACTIVE);
+    		return CategoryDAORowMapper.mapCategoryList(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 }

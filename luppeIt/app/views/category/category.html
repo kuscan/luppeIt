@@ -1,0 +1,69 @@
+#{extends 'layout.html' /}
+
+    <div class="gradient-1">
+    	<div class="container">
+        	<div class="row">
+          		<div class="span12">
+          			
+          			<h2>${category.categoryName}</h2>
+          		
+	          		<div class="tabbable">
+	           			<ul class="nav nav-tabs">
+	           				<li class="active"><a href="#topNewsTab" data-toggle="tab">Top News</a></li>
+	           				<li><a href="#mostRecentTab" data-toggle="tab">Most Recent</a></li>
+	            		</ul>
+	            		<div class="tab-content">
+	            			<div class="tab-pane active" id="topNewsTab">
+	            				#{if topNews == null || topNews.size() == 0}
+	            					<h4>There are no records in last week in ${category.categoryName} category!</h4>
+	            				#{/if}
+	            				#{else}
+		            				#{list items:topNews, as:'share'}
+		            				<div class="category-shares-list-item">
+								    	<div class="share-title">
+								            <a href="@{share.ShareController.share(share.shareId)}">${share.title}</a>
+								        </div>
+								      	<div class="share-stats">
+								        	<div class="luppe-count">${share.luppeCount} <i class="icon-thumbs-up"></i></div>
+								            <div class="dig-count">${share.digCount} <i class="icon-thumbs-down"></i></div>
+								        </div>
+								        <div class="share-time">
+								            ${new Date(share.lastModifiedDate).since()}
+								        </div>
+								    </div>
+								    #{/list}
+							    #{/else}
+	            			</div>
+	            			<div class="tab-pane" id="mostRecentTab">
+	            				#{if mostRecents == null || mostRecents.size() == 0}
+	            					<h4>There are no records in last week in ${category.categoryName} category!</h4>
+	            				#{/if}
+	            				#{else}
+		            				#{list items:mostRecents, as:'share'}
+		            				<div class="category-shares-list-item">
+								    	<div class="share-title">
+								            <a href="@{share.ShareController.share(share.shareId)}">${share.title}</a>
+								        </div>
+								      	<div class="share-stats">
+								        	<div class="luppe-count">${share.luppeCount} <i class="icon-thumbs-up"></i></div>
+								            <div class="dig-count">${share.digCount} <i class="icon-thumbs-down"></i></div>
+								        </div>
+								        <div class="share-time">
+								            ${new Date(share.lastModifiedDate).since()}
+								        </div>
+								    </div>
+								    #{/list}
+							    #{/else}
+	            			</div>
+	            		</div>
+	          		</div>
+	          		<br/><br/>
+            	</div>
+<!--             	<div class="span4"> -->
+<!--             	</div> -->
+        	</div>
+      	</div>  
+    </div>
+		
+
+        

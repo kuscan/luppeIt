@@ -12,6 +12,9 @@ public class NavigationConstants {
     public static final String mainPage = "/main/application/index.html";
     public static final String homePage = "/main/application/home.html";
     
+    public static final String categoriesPage = "/category/categories.html";
+    public static final String categoryPage = "/category/category.html";
+    
     public static final String errorPage500 = "/errors/500.html";
     public static final String errorPage404 = "/errors/404.html";
 

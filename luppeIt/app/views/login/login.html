@@ -3,43 +3,44 @@
 	<div class="gradient-1">
       	<div class="container"> 
         	<div class="row">
-          		<div class="span8">
-          			<h1>Login</h1>
-			        #{form @login.LoginController.completeLogin(), method:'POST', id:'loginForm'}
-			        <p>
-			            #{field 'email'}
-			            <label>E-mail:</label>
-			            <input type="text" name="${field.name}" />
-			            #{if arguments.emailRequiredError != null}
-			            <span class="error">
-			                ${arguments.emailRequiredError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'password'}
-			            <label>Password:</label>
-			            <input type="password" name="${field.name}" />
-			            #{if arguments.passwordRequiredError != null}
-			            <span class="error">
-			                ${arguments.passwordRequiredError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            <input type="submit" value="Login!" />
-			            #{if arguments.loginError != null}
-			            <span class="error">
-			                ${arguments.loginError}
-			            </span>
-			            #{/if}
-			        </p>
-			        #{/form}
-            		
+          		<div class="span6">
+          			<h2>Login</h2>
+          			<div class="hero-unit">
+				        #{form @login.LoginController.completeLogin(), method:'POST', id:'loginForm'}
+				        <p>
+				            #{field 'email'}
+				            <label>E-mail:</label>
+				            <input type="text" name="${field.name}" />
+				            #{if arguments.emailRequiredError != null}
+				            <span class="error">
+				                ${arguments.emailRequiredError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'password'}
+				            <label>Password:</label>
+				            <input type="password" name="${field.name}" />
+				            #{if arguments.passwordRequiredError != null}
+				            <span class="error">
+				                ${arguments.passwordRequiredError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            <input type="submit" value="Login!" />
+				            #{if arguments.loginError != null}
+				            <span class="error">
+				                ${arguments.loginError}
+				            </span>
+				            #{/if}
+				        </p>
+				        #{/form}
+            		</div>
             	</div>
-            	<div class="span4">
+            	<div class="span6">
             		
             	</div>
             </div>

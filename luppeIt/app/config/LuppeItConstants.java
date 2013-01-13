@@ -46,6 +46,10 @@ public class LuppeItConstants {
     //share statuses
     public static final Integer SHARE_STATUS_ACTIVE = 1;
     public static final Integer SHARE_STATUS_PASSIVE = 2;
+    
+    //category statuses
+    public static final Integer CATEGORY_STATUS_ACTIVE = 1;
+    public static final Integer CATEGORY_STATUS_PASSIVE = 2;
 
     //resource statuses
     public static final Integer RESOURCE_STATUS_ACTIVE = 1;

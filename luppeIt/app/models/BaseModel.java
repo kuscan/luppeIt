@@ -10,4 +10,5 @@ import play.db.jpa.GenericModel;
  * To change this template use File | Settings | File Templates.
  */
 public class BaseModel extends GenericModel {
+
 }

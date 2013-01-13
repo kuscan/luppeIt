@@ -1,0 +1,59 @@
+#{extends 'layout.html' /}
+
+    <div class="gradient-1">
+    	<div class="container">
+        	<div class="row">
+          		<div class="span12">
+	          		<div class="tabbable">
+	           			<ul class="nav nav-tabs">
+	           				#{list items:categoriesWithShares, as:'categoryWithShares'}
+	           					#{if categoryWithShares_isFirst}
+	           					<li class="active"><a href="#tab${categoryWithShares.category.categoryId}" data-toggle="tab">${categoryWithShares.category.categoryName}</a></li>
+	           					#{/if}
+	           					#{else}
+	           					<li><a href="#tab${categoryWithShares.category.categoryId}" data-toggle="tab">${categoryWithShares.category.categoryName}</a></li>
+	           					#{/else}
+	           				#{/list}
+	            		</ul>
+	            		<div class="tab-content">
+	            			#{list items:categoriesWithShares, as:'categoryWithShares'}
+	            				#{if categoryWithShares_isFirst}
+	            				<div class="tab-pane active" id="tab${categoryWithShares.category.categoryId}">
+	            				#{/if}
+	            				#{else}
+	            				<div class="tab-pane" id="tab${categoryWithShares.category.categoryId}">
+	            				#{/else}
+	           						#{if categoryWithShares.shares == null || categoryWithShares.shares.size() == 0 }
+	           							<h4>There are no records in last week in ${categoryWithShares.category.categoryName} category!</h4>
+	           						#{/if}
+	           						#{else}
+			                			#{list items:categoryWithShares.shares.size() > 30 ? categoryWithShares.shares.subList(0,29) : categoryWithShares.shares, as:'share'}
+							            <div class="category-shares-list-item">
+							            	<div class="share-title">
+							            		<a href="@{share.ShareController.share(share.shareId)}">${share.title}</a>
+							            	</div>
+							            	<div class="share-stats">
+							            		<div class="luppe-count">${share.luppeCount} <i class="icon-thumbs-up"></i></div>
+							            		<div class="dig-count">${share.digCount} <i class="icon-thumbs-down"></i></div>
+							            	</div>
+							            	<div class="share-time">
+							            		${new Date(share.lastModifiedDate).since()}
+							            	</div>
+							            </div>
+							            #{/list}
+							            <h4><a href="@{category.CategoryController.category(categoryWithShares.category.categoryId)}">See all</a></h4>
+						            #{/else}
+		              			</div>
+	           				#{/list}
+	            		</div>
+	          		</div>
+	          		<br/><br/>
+            	</div>
+<!--             	<div class="span4"> -->
+<!--             	</div> -->
+        	</div>
+      	</div>  
+    </div>
+		
+
+        

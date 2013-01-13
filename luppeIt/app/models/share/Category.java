@@ -1,13 +1,6 @@
 package models.share;
 
 import models.BaseModel;
-import play.db.jpa.GenericModel;
-import play.db.jpa.Model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,5 +37,12 @@ public class Category extends BaseModel {
 
     public void setCategoryStatusId(Integer categoryStatusId) {
         this.categoryStatusId = categoryStatusId;
+    }
+    
+    public boolean equals(Category category) {
+    	if (this.categoryId == category.getCategoryId() && this.categoryName.equals(category.getCategoryName()) && this.categoryStatusId == category.getCategoryStatusId()) {
+    		return true;
+    	}
+    	return false;
     }
 }

@@ -8,31 +8,67 @@
 	           			<ul class="nav nav-tabs">
 	              			<li class="active"><a href="#topNewsTab" data-toggle="tab">Top News</a></li>
 	              			<li><a href="#mostRecentTab" data-toggle="tab">Most Recent</a></li>
-	              			
+	              			<li><a href="#categoriesTab" data-toggle="tab">Categories</a></li>
 	            		</ul>
 	            		<div class="tab-content">
 	              			<div class="tab-pane active" id="topNewsTab">
 	                			#{list items:mostRecents, as:'mostRecent'}
-		              			<br/>
-					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
-					            #{verbatim}
-					            	<p>${mostRecent.description}</p>
-					            #{/verbatim}
-					            ${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
-					            <br/><br/>
-					            <hr/>
+	                			<div class="share-list-item">
+	                				<div class="share-title">
+						            	<h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
+						            	<div class="share-time">${new Date(mostRecent.lastModifiedDate).since()}</div>
+						            </div>
+						            <div class="share-description">
+						            #{verbatim}
+						            	<p>${mostRecent.description}</p>
+						            #{/verbatim}
+						            </div>
+						            <div class="share-category-resource">
+						            	${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
+						            </div>
+						            <div class="share-stats">
+						            	<div class="luppe-count">
+						            		${mostRecent.luppeCount} <i class="icon-thumbs-up"></i>
+						            	</div>
+						            	<div class="dig-count">
+						            		${mostRecent.digCount} <i class="icon-thumbs-down"></i>
+						            	</div>
+						            </div>
+					            </div>
 					            #{/list}
 	              			</div>
 	              			<div class="tab-pane" id="mostRecentTab">
 		              			#{list items:mostRecents, as:'mostRecent'}
+		              			<div class="share-list-item">
+	                				<div class="share-title">
+						            	<h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
+						            	<div class="share-time">${new Date(mostRecent.lastModifiedDate).since()}</div>
+						            </div>
+						            <div class="share-description">
+						            #{verbatim}
+						            	<p>${mostRecent.description}</p>
+						            #{/verbatim}
+						            </div>
+						            <div class="share-category-resource">
+						            	${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
+						            </div>
+						            <div class="share-stats">
+						            	<div class="luppe-count">
+						            		${mostRecent.luppeCount} <i class="icon-thumbs-up"></i>
+						            	</div>
+						            	<div class="dig-count">
+						            		${mostRecent.digCount} <i class="icon-thumbs-down"></i>
+						            	</div>
+						            </div>
+					            </div>
+					            #{/list}
+	              			</div>
+	              			<div class="tab-pane" id="categoriesTab">
+		              			#{list items:categories, as:'category'}
 		              			<br/>
-					            <h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
-					            #{verbatim}
-					            	<p>${mostRecent.description}</p>
-					            #{/verbatim}
-					            ${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
-					            <br/><br/>
-					            <hr/>
+					            <h4><a href="@{category.CategoryController.category(category.categoryId)}">${category.categoryName}</a></h4>
+					            <br/>
+					            #{if !category_isLast}<hr/>#{/if}
 					            #{/list}
 	              			</div>
 	            		</div>

@@ -1,6 +1,7 @@
 package database.dao.share;
 
 import models.share.Share;
+import play.Logger;
 import play.db.DB;
 import play.db.jpa.JPQL;
 
@@ -11,6 +12,8 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+
+import config.LuppeItConstants;
 
 
 
@@ -55,6 +58,16 @@ public class ShareDAO {
     public static final String QUERY_UPDATE_SHARE_DIG_COUNT_INCREASE_BY_ONE = "UPDATE share SET dig_count = dig_count + 1 WHERE share_id = ?";
     public static final String QUERY_UPDATE_SHARE_LUPPE_COUNT_DECREASE_BY_ONE = "UPDATE share SET luppe_count = luppe_count - 1 WHERE share_id = ?";
     public static final String QUERY_UPDATE_SHARE_DIG_COUNT_DECREASE_BY_ONE = "UPDATE share SET dig_count = dig_count - 1 WHERE share_id = ?";
+    public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
+    																							"FROM share AS s " +
+    																							"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+    																							"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+    																							"JOIN category AS c ON rr.category_id = c.category_id " +
+    																							"WHERE " +
+    																							"s.category_id = ? " +
+    																							"AND s.share_status_id = ? " +
+    																							"AND s.last_modified_date > ? " +
+    																							"ORDER BY s.last_modified_date DESC";
     
     public static List<Share> getMostRecent() {
         try {
@@ -161,5 +174,21 @@ public class ShareDAO {
     	}
     	return false;
     }
-
+    
+    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryId(Integer categoryId) {
+    	try {
+    		Calendar cal = Calendar.getInstance();
+    		cal.add(Calendar.DATE, -7);
+    		
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID);
+    		ps.setInt(1, categoryId);
+    		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
+    		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
+    		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
 }

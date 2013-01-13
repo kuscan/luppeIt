@@ -4,85 +4,86 @@
       	<div class="container"> 
         	<div class="row">
           		<div class="span8">
-          			<h1>Just fill the form and start lupping!</h1>
-			        #{form @registration.RegistrationController.completeRegistration(), method:'POST', id:'registrationForm'}
-			        <p>
-			            #{field 'email'}
-			            <label>E-mail:</label>
-			            <input type="text" name="${field.name}" value="${arguments.emailValue}"/>
-			            #{if arguments.emailRequiredError != null}
-			            <span class="error">
-			                ${arguments.emailRequiredError}
-			            </span>
-			            #{/if}
-			            #{if arguments.emailFormatError != null}
-			            <span class="error">
-			                ${arguments.emailFormatError}
-			            </span>
-			            #{/if}
-			
-			
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'password'}
-			            <label>Password:</label>
-			            <input type="password" name="${field.name}" />
-			            #{if arguments.passwordRequiredError != null}
-			            <span class="error">
-			                ${arguments.passwordRequiredError}
-			            </span>
-			            #{/if}
-			            #{if arguments.passwordFormatError != null}
-			            <span class="error">
-			                ${arguments.passwordFormatError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			            #{field 'passwordConfirmation'}
-			            <label>Confirm Password:</label>
-			            <input type="password" name="${field.name}" />
-			            #{if arguments.passwordConfirmationRequiredError != null}
-			            <span class="error">
-			                ${arguments.passwordConfirmationRequiredError}
-			            </span>
-			            #{/if}
-			            #{if arguments.passwordConfirmationMatchError != null}
-			            <span class="error">
-			                ${arguments.passwordConfirmationMatchError}
-			            </span>
-			            #{/if}
-			            #{/field}
-			        </p>
-			        <p>
-			        	#{field 'userCategories'}
-			        	<label>Categories you are interested in:</label>
-			        	<select name="${field.name}" id="userCategories" multiple="multiple" size="10">
-			        		#{list items:categories, as:'category'}
-			        			<option value="${category.categoryId}">${category.categoryName}</option>
-			        		#{/list}
-			        	</select>
-			        	#{if arguments.userCategoryError != null}
-			            <span class="error">
-			                ${arguments.userCategoryError}
-			            </span>
-			            #{/if}
-			        	<div id="selectAll" style="float:left;">Select All </div> <div id="deselectAll" style="float:left;margin-left:10px;"> Deselect All</div>
-			        	<br/>
-			        	#{/field}
-			        </p>
-			        <p>
-			            <input type="submit" value="Register!" />
-			            #{if arguments.emailAlreadyExistsError != null}
-			            <span class="error">
-			                ${arguments.emailAlreadyExistsError}
-			            </span>
-			            #{/if}
-			        </p>
-			        #{/form}
-            		
+          			<h2>Just fill the form and start lupping!</h2>
+          			<div class="hero-unit">
+				        #{form @registration.RegistrationController.completeRegistration(), method:'POST', id:'registrationForm'}
+				        <p>
+				            #{field 'email'}
+				            <label>E-mail:</label>
+				            <input type="text" name="${field.name}" value="${arguments.emailValue}"/>
+				            #{if arguments.emailRequiredError != null}
+				            <span class="error">
+				                ${arguments.emailRequiredError}
+				            </span>
+				            #{/if}
+				            #{if arguments.emailFormatError != null}
+				            <span class="error">
+				                ${arguments.emailFormatError}
+				            </span>
+				            #{/if}
+				
+				
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'password'}
+				            <label>Password:</label>
+				            <input type="password" name="${field.name}" />
+				            #{if arguments.passwordRequiredError != null}
+				            <span class="error">
+				                ${arguments.passwordRequiredError}
+				            </span>
+				            #{/if}
+				            #{if arguments.passwordFormatError != null}
+				            <span class="error">
+				                ${arguments.passwordFormatError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				            #{field 'passwordConfirmation'}
+				            <label>Confirm Password:</label>
+				            <input type="password" name="${field.name}" />
+				            #{if arguments.passwordConfirmationRequiredError != null}
+				            <span class="error">
+				                ${arguments.passwordConfirmationRequiredError}
+				            </span>
+				            #{/if}
+				            #{if arguments.passwordConfirmationMatchError != null}
+				            <span class="error">
+				                ${arguments.passwordConfirmationMatchError}
+				            </span>
+				            #{/if}
+				            #{/field}
+				        </p>
+				        <p>
+				        	#{field 'userCategories'}
+				        	<label>Categories you are interested in:</label>
+				        	<select name="${field.name}" id="userCategories" multiple="multiple" size="10">
+				        		#{list items:categories, as:'category'}
+				        			<option value="${category.categoryId}">${category.categoryName}</option>
+				        		#{/list}
+				        	</select>
+				        	#{if arguments.userCategoryError != null}
+				            <span class="error">
+				                ${arguments.userCategoryError}
+				            </span>
+				            #{/if}
+				        	<div id="selectAll" style="float:left;">Select All </div> <div id="deselectAll" style="float:left;margin-left:10px;"> Deselect All</div>
+				        	<br/>
+				        	#{/field}
+				        </p>
+				        <p>
+				            <input type="submit" value="Register!" />
+				            #{if arguments.emailAlreadyExistsError != null}
+				            <span class="error">
+				                ${arguments.emailAlreadyExistsError}
+				            </span>
+				            #{/if}
+				        </p>
+				        #{/form}
+            		</div>
             	</div>
             	<div class="span4">
             		
