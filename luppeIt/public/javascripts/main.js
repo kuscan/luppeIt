@@ -1,4 +1,4 @@
-var baseUrl = "http://localhost:7880";
+var baseUrl = "http://swe.cmpe.boun.edu.tr:7880";
 
 $(document).ready(function() {
 
