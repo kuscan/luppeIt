@@ -43,25 +43,11 @@ public class ApplicationController extends BaseController {
             homepage();
         }
 
-        /*
-            If user is anonymous, continue from here
-         */
         HashMap<String, String> arguments = new HashMap<String, String>();
 
-        /*
-            Get all categories and inject into view
-         */
         List<Category> categories = CategoryDAO.getAllCategoriesOrderByName();
         renderArgs.put("categories", categories);
 
-        /*
-            Get top news and inject into view
-         */
-        //List<Share> topNews = Share.find("")
-
-        /*
-            Get most recent news and inject into view
-         */
         List<Share> mostRecents = ShareDAO.getMostRecent();
         renderArgs.put("mostRecents", mostRecents);
 
@@ -73,20 +59,9 @@ public class ApplicationController extends BaseController {
     static void homepage() {
         HashMap<String, String> arguments = new HashMap<String, String>();
 
-        /*
-            Get all categories and inject into view
-         */
         List<Category> categories = CategoryDAO.getActiveUserCategories(Integer.parseInt(session.get("userId")));
         renderArgs.put("categories", categories);
         
-        /*
-            Get top news and inject into view
-         */
-        //List<Share> topNews = Share.find("")
-
-        /*
-            Get most recent news and inject into view
-         */
         List<Share> mostRecents = ShareDAO.getMostRecent();
         renderArgs.put("mostRecents", mostRecents);
 

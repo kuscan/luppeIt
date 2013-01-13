@@ -64,7 +64,42 @@
 		            
 		            <div class="categories">
 		            	<h3>TAGS</h3>
-						<div class="button-cat">Human Resources</div>
+		            	#{if user != null}
+			            	<div id="addTagButton" class="add-tag-button">
+			            		<i class="icon-plus"></i>
+			            	</div>
+							<div id="addTagFormInfo" class="add-tag-form-info">
+								Add Tag
+							</div>
+							<div id="addTagForm" class="add-tag-form">
+								#{form @share.ShareController.addTagToShare(), method:'POST', id:'addTagToShareForm'}
+									#{field 'tag'}
+									<input type="text" id="tags" name="${field.name}" autocomplete="on" />
+									#{/field}
+									<input type="hidden" name="shareId" value="${share.shareId}" />
+									<input type="submit" value="Add" />
+								#{/form}
+							</div>
+							<br/><br/>
+							<div id="contributeTagTruthMessage"></div>
+							<br/>
+						#{/if}
+						#{if tags == null || tags.size() == 0}
+							#{if user != null}
+								Be the one to tag this share!
+							#{/if}
+							#{else}
+								There are no tags of this share for now!
+							#{/else} 
+						#{/if}
+						#{else}
+							#{list items:tags, as:'tag'}
+								<div class="button-cat">${tag.tagName}</div>
+								<a href="#" onclick="confirmShareTag(${tag.shareTagId})"><i class="icon-ok"></i></a>
+								<a href="#" onclick="denyShareTag(${tag.shareTagId})"><i class="icon-remove"></i></a>
+								<br/>
+							#{/list}
+						#{/else}
 		            </div>
             	</div>
             </div>

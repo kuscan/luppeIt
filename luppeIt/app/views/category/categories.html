@@ -3,7 +3,7 @@
     <div class="gradient-1">
     	<div class="container">
         	<div class="row">
-          		<div class="span12">
+          		<div class="span8">
 	          		<div class="tabbable">
 	           			<ul class="nav nav-tabs">
 	           				#{list items:categoriesWithShares, as:'categoryWithShares'}
@@ -30,7 +30,14 @@
 			                			#{list items:categoryWithShares.shares.size() > 30 ? categoryWithShares.shares.subList(0,29) : categoryWithShares.shares, as:'share'}
 							            <div class="category-shares-list-item">
 							            	<div class="share-title">
-							            		<a href="@{share.ShareController.share(share.shareId)}">${share.title}</a>
+							            		<a href="@{share.ShareController.share(share.shareId)}">
+							            			#{if share.title.length() > 50}
+							            				${share.title.substring(0,49)}...
+							            			#{/if}
+							            			#{else}
+							            				${share.title}
+							            			#{/else}
+							            		</a>
 							            	</div>
 							            	<div class="share-stats">
 							            		<div class="luppe-count">${share.luppeCount} <i class="icon-thumbs-up"></i></div>
@@ -41,6 +48,7 @@
 							            	</div>
 							            </div>
 							            #{/list}
+							            <br/>
 							            <h4><a href="@{category.CategoryController.category(categoryWithShares.category.categoryId)}">See all</a></h4>
 						            #{/else}
 		              			</div>
@@ -49,8 +57,27 @@
 	          		</div>
 	          		<br/><br/>
             	</div>
-<!--             	<div class="span4"> -->
-<!--             	</div> -->
+				<div class="span4">
+            		<div class="clearfix"></div>
+            		<div class="categories categories-widget">
+		            	<a href="@{category.CategoryController.categories()}">
+		            		<h4>Categories</h4>
+		            	</a>
+		            	#{list items:categories, as:'category'}
+							<a href="@{category.CategoryController.category(category.categoryId)}">
+								<div class="button-cat">${category.categoryName}</div>
+							</a>
+						#{/list}
+						<a href="@{category.CategoryController.categories()}">
+							#{if user == null}
+								<div class="button-cat">All Categories</div>
+							#{/if}
+							#{else}
+								<div class="button-cat">All Your Categories</div>
+							#{/else}
+						</a>
+		            </div>
+            	</div>
         	</div>
       	</div>  
     </div>

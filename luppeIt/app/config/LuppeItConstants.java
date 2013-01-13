@@ -62,6 +62,10 @@ public class LuppeItConstants {
     //user statuses
     public static final Integer USER_STATUS_ID_REGISTERED = 1;
     public static final Integer USER_STATUS_ID_ACTIVE = 2;
+    
+    //tag statuses
+    public static final Integer TAG_STATUS_ID_ACTIVE = 1;
+    public static final Integer TAG_STATUS_ID_PASSIVE = 2;
 
     //user types
     public static final Integer RSS_READER_USER_ID = 0;

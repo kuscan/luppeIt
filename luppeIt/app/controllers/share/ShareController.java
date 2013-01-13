@@ -1,6 +1,7 @@
 package controllers.share;
 
 import java.util.HashMap;
+import java.util.List;
 
 import action.CheckUserActionEndPoint;
 import action.DigShareEndPoint;
@@ -8,14 +9,18 @@ import action.LuppeShareEndPoint;
 import action.ViewShareEndPoint;
 
 import models.share.Share;
+import models.share.ShareTagWithName;
+import models.share.Tag;
 
 import config.LuppeItConstants;
 import config.NavigationConstants;
 import controllers.BaseController;
 import database.dao.share.ShareDAO;
+import database.dao.tag.TagDAO;
 import exception.ProvisionException;
 import play.Logger;
 import play.cache.Cache;
+import play.db.jpa.Transactional;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Scope;
@@ -71,6 +76,9 @@ public class ShareController extends BaseController {
     	} else {
     		renderArgs.put("share", share);
     	}
+    	
+    	List<ShareTagWithName> tags = TagDAO.getTagsOfShare(shareId);
+    	renderArgs.put("tags", tags);
     	
     	renderTemplate(NavigationConstants.sharePage, arguments);
     }
@@ -168,5 +176,19 @@ public class ShareController extends BaseController {
         }
     }
 
-
+    @Transactional
+    public static void addTagToShare(String tag, Integer shareId) {
+    	try {
+    		tag = tag.toLowerCase();
+    		Long tagId = TagDAO.addTag(tag);
+    		if (tagId == null) {
+    			tagId = TagDAO.getTagIdOfTag(tag);
+    		}
+    		TagDAO.addTagToShare(tagId, shareId);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+		}
+    	redirect("/share/" + shareId.toString());
+    }
+    
 }

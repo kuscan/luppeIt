@@ -33,22 +33,22 @@
 <body>
 	<header id="header">
     <hr class="hr_t">
-		<nav class="navbar">
+		<nav class="navbar edited-navbar">
 			<div class="navbar-inner">
 				<div class="container">
         			<a class="logo" href="@{main.ApplicationController.index()}"><img src="@{'/public/images/logo-header.png'}" /></a>
 					<ul class="nav">
 						#{if user != null}
 						<li class="dropdown">
-							<a href="@{profile.ProfileController.profile()}">${user.username}</a>
+							<div class="header-user-box"><i class="icon-user"></i> <a href="@{profile.ProfileController.profile()}">${user.username}</a></div>
 							<ul>
-								<li><a href="@{profile.ProfileController.profile()}">Profile</a></li>
-								<li><a href="@{admin.AdminController.logout}">Logout</a></li>
+								<li><a href="@{profile.ProfileController.profile()}"><i class="icon-cogs"></i> Settings</a></li>
+								<li><a href="@{admin.AdminController.logout}"><i class="icon-off"></i> Logout</a></li>
 							</ul>
 						</li>
 						#{/if}
 						#{else}
-						<li><a href="@{admin.AdminController.login()}">Login as Administrator</a></li>
+						<li><a href="@{admin.AdminController.login()}"><i class="icon-home"></i> Login as Administrator</a></li>
 						#{/else}
 					</ul>
 				</div>

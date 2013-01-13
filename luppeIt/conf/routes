@@ -36,6 +36,11 @@
 *		/updateProfile							profile.ProfileController.updateProfile
 *		/updateUserCategories					profile.ProfileController.updateUserCategories
 
+# Ajax
+*		/autocompleteTag/{text}					ajax.AjaxController.autocompleteTag
+*		/confirmShareTag/{shareTagId}			ajax.AjaxController.confirmShareTag
+*		/denyShareTag/{shareTagId}				ajax.AjaxController.denyShareTag
+
 # Administration
 *		/admin									admin.AdminController.index
 *		/admin/login							admin.AdminController.login

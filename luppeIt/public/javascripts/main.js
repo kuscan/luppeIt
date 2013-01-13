@@ -1,3 +1,5 @@
+var baseUrl = "http://localhost:7880";
+
 $(document).ready(function() {
 
 	$("#selectAll").bind('click', function(){
@@ -11,10 +13,52 @@ $(document).ready(function() {
 			$('#userCategories option').prop("selected", false);
 		});
 	});
-    
+	
+	$("#addTagButton").bind('click', function(){
+		if ($('#addTagFormInfo').css('visibility') == 'visible') {
+			$('#addTagFormInfo').css('visibility', 'collapse');
+			$('#addTagFormInfo').html('');
+			$('#addTagForm').css('visibility', 'visible');
+			$('#addTagButton').html('<i class="icon-minus"></i>');
+		} else {
+			$('#addTagFormInfo').css('visibility', 'visible');
+			$('#addTagFormInfo').html('Add Tag');
+			$('#addTagForm').css('visibility', 'collapse');
+			$('#addTagButton').html('<i class="icon-plus"></i>');
+		}
+	});
+	
+	$("#addTagFormInfo").bind('click', function(){
+		if ($('#addTagFormInfo').css('visibility') == 'visible') {
+			$('#addTagFormInfo').css('visibility', 'collapse');
+			$('#addTagFormInfo').html('');
+			$('#addTagForm').css('visibility', 'visible');
+			$('#addTagButton').html('<i class="icon-minus"></i>');
+		} else {
+			$('#addTagFormInfo').css('visibility', 'visible');
+			$('#addTagFormInfo').html('Add Tag');
+			$('#addTagForm').css('visibility', 'collapse');
+			$('#addTagButton').html('<i class="icon-plus"></i>');
+		}
+	});
+	
+	
+	$("#tags").keyup(function autocompleteTag() {
+		var text = $(this).val();
+		console.log(text);
+		jQuery.noConflict();
+		$.ajax({
+			url: baseUrl + "/autocompleteTag/" + text,
+			type: "POST",
+			data: {text: text},
+			success: function(response) {
+				console.log(response);
+				$("#tags").autocomplete({ source: response });
+			}
+		});
+	});
+		
 });
-
-var baseUrl = "http://localhost:7880";
 
 function luppeShare(shareId) {
     $.ajax({
@@ -43,3 +87,35 @@ function digShare(shareId) {
 		}
 	});
 }
+
+function confirmShareTag(shareTagId) {
+	$.ajax({
+		url: baseUrl + "/confirmShareTag/" + shareTagId,
+		type: "POST",
+		data: {shareTagId: shareTagId},
+		success: function(response) {
+			alert($('#contributeTagTruthMessage').html().indexOf("Thanks"));
+			if ($('#contributeTagTruthMessage').html().indexOf("Thanks") >= 0) {
+				
+			} else {
+				$('#contributeTagTruthMessage').html("Thanks for contribution :)");
+			}
+		}
+	});
+}
+
+function denyShareTag(shareTagId) {
+	$.ajax({
+		url: baseUrl + "/denyShareTag/" + shareTagId,
+		type: "POST",
+		data: {shareTagId: shareTagId},
+		success: function(response) {
+			if ($('#contributeTagTruthMessage').html().indexOf("Thanks") >= 0) {
+				
+			} else {
+				$('#contributeTagTruthMessage').html("Thanks for contribution :)");
+			}
+		}
+	});
+}
+

@@ -13,6 +13,22 @@
 	background: white;
 }
 
+.header-user-box {
+	margin-top: 8px;
+}
+
+.edited-navbar {
+	margin-bottom: -40px !important;
+}
+
+.edited-navbar-frame-layout {
+	margin-bottom: -15px !important;
+}
+
+.categories-widget {
+	position: fixed;
+}
+
 .luppe-button {
 
 	width: 60%;
@@ -224,3 +240,70 @@
 .share-list-item .share-stats .luppe-count {
 	margin-right:10px;
 }
+
+.add-tag-button {
+	margin: 4px;
+	float:left;
+}
+
+.add-tag-form-info {
+	margin: 4px;
+	float:left;
+	visibility: visible;
+}
+
+.add-tag-form {
+	margin: 4px;
+	float:left;
+	visibility: collapse;
+}
+
+.add-tag-form input[type='text'] {
+	display:inline-block !important;
+	height:20px !important;
+	width:100px !important;
+	padding:0 !important;
+/* 	margin-bottom:10px !important; */
+	font-size:12px !important;
+	line-height:20px !important;
+	color:#555555 !important;
+/* 	-webkit-border-radius:4px !important; */
+/* 	-moz-border-radius:4px !important; */
+/* 	border-radius:4px !important; */
+	vertical-align:middle !important;
+}
+
+.add-tag-form input[type='submit'] {
+	display:inline-block !important;
+	height:22px !important;
+	padding:3px !important;
+/* 	margin-bottom:10px !important; */
+	font-size:12px !important;
+	line-height:10px !important;
+	color:#555555 !important;
+/* 	-webkit-border-radius:4px !important; */
+/* 	-moz-border-radius:4px !important; */
+/* 	border-radius:4px !important; */
+	vertical-align:middle !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

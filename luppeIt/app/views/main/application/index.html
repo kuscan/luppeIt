@@ -76,6 +76,20 @@
 	          		<br/><br/>
             	</div>
             	<div class="span4">
+            		<div class="clearfix"></div>
+            		<div class="categories categories-widget">
+		            	<a href="@{category.CategoryController.categories()}">
+		            		<h4>Categories</h4>
+		            	</a>
+		            	#{list items:categories, as:'category'}
+							<a href="@{category.CategoryController.category(category.categoryId)}">
+								<div class="button-cat">${category.categoryName}</div>
+							</a>
+						#{/list}
+						<a href="@{category.CategoryController.categories()}">
+							<div class="button-cat">All Categories</div>
+						</a>
+		            </div>
             	</div>
         	</div>
       	</div>  

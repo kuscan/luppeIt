@@ -69,6 +69,14 @@ public class CategoryController extends BaseController {
     	
     	List<Share> mostRecents = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryId(categoryId);
     	renderArgs.put("mostRecents", mostRecents);
+    	
+    	List<Category> categories = null;
+    	if (checkLogin()) {
+    		categories = CategoryDAO.getActiveUserCategories(getUserId());
+    	} else {
+    		categories = CategoryDAO.getAllCategoriesOrderByName();
+    	}
+    	renderArgs.put("categories", categories);
     	       
         renderTemplate(NavigationConstants.categoryPage, arguments);
     }
