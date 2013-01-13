@@ -94,7 +94,6 @@ function confirmShareTag(shareTagId) {
 		type: "POST",
 		data: {shareTagId: shareTagId},
 		success: function(response) {
-			alert($('#contributeTagTruthMessage').html().indexOf("Thanks"));
 			if ($('#contributeTagTruthMessage').html().indexOf("Thanks") >= 0) {
 				
 			} else {
