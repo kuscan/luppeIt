@@ -51,7 +51,8 @@ public class ApplicationController extends BaseController {
         List<Share> mostRecents = ShareDAO.getMostRecent();
         renderArgs.put("mostRecents", mostRecents);
 
-
+        List<Share> topNews = ShareDAO.getTopNews();
+        renderArgs.put("topNews", topNews);
 
         renderTemplate(NavigationConstants.mainPage, arguments);
     }
@@ -62,9 +63,11 @@ public class ApplicationController extends BaseController {
         List<Category> categories = CategoryDAO.getActiveUserCategories(Integer.parseInt(session.get("userId")));
         renderArgs.put("categories", categories);
         
-        List<Share> mostRecents = ShareDAO.getMostRecent();
+        List<Share> mostRecents = ShareDAO.getMostRecentForRegisteredUser();
         renderArgs.put("mostRecents", mostRecents);
 
+        List<Share> topNews = ShareDAO.getTopNewsForRegisteredUser();
+        renderArgs.put("topNews", topNews);
 
 
         renderTemplate(NavigationConstants.homePage, arguments);

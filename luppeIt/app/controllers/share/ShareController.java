@@ -6,6 +6,7 @@ import java.util.List;
 import action.CheckUserActionEndPoint;
 import action.DigShareEndPoint;
 import action.LuppeShareEndPoint;
+import action.TagShareEndPoint;
 import action.ViewShareEndPoint;
 
 import models.share.Share;
@@ -185,6 +186,10 @@ public class ShareController extends BaseController {
     			tagId = TagDAO.getTagIdOfTag(tag);
     		}
     		TagDAO.addTagToShare(tagId, shareId);
+    		
+    		TagShareEndPoint ep = new TagShareEndPoint(Integer.parseInt(session.get("userId")), Integer.parseInt(tagId.toString()));
+    		ep.go();
+    		
     	} catch (Exception e) {
     		e.printStackTrace();
 		}

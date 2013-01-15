@@ -30,6 +30,9 @@ public class ShareDAO {
         Constant values
      */
     public static final Integer MOST_RECENT_LIMIT = 30;
+    public static final Integer TOP_NEWS_LIMIT = 30;
+    public static final Integer MOST_RECENT_LIMIT_FOR_REGISTERED_USER = 200;
+    public static final Integer TOP_NEWS_LIMIT_FOR_REGISTERED_USER = 200;
 
     /*
         Query strings for ShareDAO
@@ -43,6 +46,16 @@ public class ShareDAO {
                                                        "s.share_status_id = 1 AND " +
                                                        "rr.rss_resource_status_id = 1 " +
                                                        "ORDER BY s.last_modified_date DESC LIMIT ?";
+    public static final String QUERY_GET_TOP_NEWS = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
+											            "FROM share AS s " +
+											            "JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+											            "JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
+											            "JOIN category as c ON s.category_id = c.category_id " +
+											            "WHERE " +
+											            "s.last_modified_date > ? AND " +
+											            "s.share_status_id = 1 AND " +
+											            "rr.rss_resource_status_id = 1 " +
+											            "ORDER BY s.luppe_count DESC, s.view_count DESC LIMIT ?";
     public static final String QUERY_GET_SHARES_BY_RSS_RESOURCE_ID = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date " +
                                                                      "FROM share AS s WHERE " +
                                                                      "s.rss_resource_id = {RSS_RESOURCE_ID}";
@@ -73,6 +86,47 @@ public class ShareDAO {
         try {
         	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
         	ps.setInt(1, MOST_RECENT_LIMIT);
+        	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static List<Share> getTopNews() {
+        try {
+        	Calendar cal = Calendar.getInstance();
+        	cal.add(Calendar.DATE, -1);
+        	
+        	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_TOP_NEWS);
+        	ps.setLong(1, cal.getTimeInMillis());
+        	ps.setInt(2, TOP_NEWS_LIMIT);
+        	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static List<Share> getMostRecentForRegisteredUser() {
+        try {
+        	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
+        	ps.setInt(1, MOST_RECENT_LIMIT);
+        	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static List<Share> getTopNewsForRegisteredUser() {
+        try {
+        	Calendar cal = Calendar.getInstance();
+        	cal.add(Calendar.DATE, -1);
+        	
+        	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_TOP_NEWS);
+        	ps.setLong(1, cal.getTimeInMillis());
+        	ps.setInt(2, TOP_NEWS_LIMIT);
         	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
         } catch (SQLException e) {
         	e.printStackTrace();

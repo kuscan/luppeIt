@@ -12,26 +12,26 @@
 	            		</ul>
 	            		<div class="tab-content">
 	              			<div class="tab-pane active" id="topNewsTab">
-	                			#{list items:mostRecents, as:'mostRecent'}
+	                			#{list items:topNews, as:'topNewsItem'}
 	                			<div class="share-list-item">
 	                				<div class="share-title">
-						            	<h4><a href="@{share.ShareController.share(mostRecent.shareId)}">${mostRecent.title}</a></h4>
-						            	<div class="share-time">${new Date(mostRecent.lastModifiedDate).since()}</div>
+						            	<h4><a href="@{share.ShareController.share(topNewsItem.shareId)}">${topNewsItem.title}</a></h4>
+						            	<div class="share-time">${new Date(topNewsItem.lastModifiedDate).since()}</div>
 						            </div>
 						            <div class="share-description">
 						            #{verbatim}
-						            	<p>${mostRecent.description}</p>
+						            	<p>${topNewsItem.description}</p>
 						            #{/verbatim}
 						            </div>
 						            <div class="share-category-resource">
-						            	${mostRecent.categoryName} | <i>${mostRecent.resourceName}</i>
+						            	${topNewsItem.categoryName} | <i>${topNewsItem.resourceName}</i>
 						            </div>
 						            <div class="share-stats">
 						            	<div class="luppe-count">
-						            		${mostRecent.luppeCount} <i class="icon-thumbs-up"></i>
+						            		${topNewsItem.luppeCount} <i class="icon-thumbs-up"></i>
 						            	</div>
 						            	<div class="dig-count">
-						            		${mostRecent.digCount} <i class="icon-thumbs-down"></i>
+						            		${topNewsItem.digCount} <i class="icon-thumbs-down"></i>
 						            	</div>
 						            </div>
 					            </div>

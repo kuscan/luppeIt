@@ -32,6 +32,10 @@ public class LuppeItConstants {
 	public static final Integer DIG_SHARE_EP_USER_ID_PARAM = 5;
 	public static final Integer DIG_SHARE_EP_SHARE_ID_PARAM = 6;
 	
+	public static final Integer ACTION_ID_TAG_SHARE = 4;
+	public static final Integer TAG_SHARE_EP_USER_ID_PARAM = 7;
+	public static final Integer TAG_SHARE_EP_TAG_ID_PARAM = 8;
+	
 	/*******************************************************
 	 actions end
 	 *******************************************************/
