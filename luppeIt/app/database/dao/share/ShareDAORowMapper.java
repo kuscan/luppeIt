@@ -1,11 +1,14 @@
 package database.dao.share;
 
 import models.share.Share;
+import models.userpast.UserPastUnit;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -149,6 +152,19 @@ public class ShareDAORowMapper {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public static Map<Integer, Integer> mapResourcesOfShares(ResultSet rs) {
+    	try {
+    		Map<Integer, Integer> userPastList = new HashMap<Integer, Integer>();
+    		while (rs.next()) {
+    			userPastList.put(rs.getInt("s.share_id"), rs.getInt("rr.parent_resource_id"));
+    		}
+    		return userPastList;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 
 }

@@ -4,11 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import config.LuppeItConstants;
 
 import models.share.Share;
+import models.share.ShareTag;
 import models.share.ShareTagWithName;
 import models.share.Tag;
 import play.db.DB;
@@ -17,12 +21,13 @@ import database.dao.share.ShareDAORowMapper;
 public class TagDAO {
 	
 	public static final String QUERY_GET_CORRESPONDING_TAGS = "SELECT t.tag_name FROM tag t WHERE t.tag_name LIKE ? AND t.tag_status_id = ? ORDER BY RAND() LIMIT 15";
-	public static final String QUERY_GET_TAGS_OF_SHARE = "SELECT st.share_tag_id,st.share_id,st.tag_id,st.truth,t.tag_name FROM share_tag st JOIN tag t ON st.tag_id = t.tag_id WHERE st.share_id = ? ORDER BY st.truth DESC";
+	public static final String QUERY_GET_TAGS_OF_SHARE = "SELECT st.share_tag_id,st.share_id,st.tag_id,st.truth,t.tag_name FROM share_tag st JOIN tag t ON st.tag_id = t.tag_id WHERE st.share_id = ? AND t.tag_name NOT LIKE '${lpt}$%' ORDER BY st.truth DESC";
 	public static final String QUERY_ADD_TAG = "INSERT INTO tag (tag_name,tag_status_id) VALUES (?,?)";
 	public static final String QUERY_GET_TAG_ID_BY_NAME = "SELECT t.tag_id FROM tag t WHERE t.tag_name = ?";
 	public static final String QUERY_ADD_TAG_TO_SHARE = "INSERT INTO share_tag (share_id,tag_id,truth) VALUES (?,?,?)";
 	public static final String QUERY_UPDATE_SHARE_TAG_INCREASE_TRUTH_BY_ONE = "UPDATE share_tag SET truth = truth + 1 WHERE share_tag_id = ?";
 	public static final String QUERY_UPDATE_SHARE_TAG_DECREASE_TRUTH_BY_ONE = "UPDATE share_tag SET truth = truth - 1 WHERE share_tag_id = ?";
+	public static final String QUERY_GET_TAGS_OF_SHARES_1 = "SELECT share_id,tag_id FROM share_tag WHERE share_id IN (REPLACE_THIS)";
 	
 	public static List<String> getCorrespondingTags(String text) {
         try {
@@ -104,6 +109,40 @@ public class TagDAO {
 		} catch (SQLException e) {
 			return false;
 		}
+	}
+	
+	public static Map<Integer, List<Integer>> getTagsOfShares(List<Share> shares) {
+		String replaceThis = null;
+		for (Share share: shares) {
+			if (replaceThis != null) {
+				replaceThis += ",'" + share.getShareId() + "'";
+			} else {
+				replaceThis = "'" + share.getShareId() + "'";
+			}
+		}
+		
+		try {
+			PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_TAGS_OF_SHARES_1.replace("REPLACE_THIS", replaceThis));
+			List<ShareTag> shareTags = TagDAORowMapper.mapShareIdTagIdList(ps.executeQuery());
+			
+			Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
+			for (ShareTag shareTag: shareTags) {
+				if (map.get(shareTag.getShareId()) == null) {
+					map.put(shareTag.getShareId(), new ArrayList<Integer>());
+					map.get(shareTag.getShareId()).add(shareTag.getTagId());
+				} else {
+					map.get(shareTag.getShareId()).add(shareTag.getTagId());
+				}
+			}
+			
+			return map;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 	
 }

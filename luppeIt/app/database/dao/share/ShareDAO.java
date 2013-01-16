@@ -1,19 +1,25 @@
 package database.dao.share;
 
 import models.share.Share;
+import models.userpast.UserPastUnit;
 import play.Logger;
 import play.db.DB;
 import play.db.jpa.JPQL;
+import play.db.jpa.Transactional;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import config.LuppeItConstants;
+import database.dao.tag.TagDAO;
 
 
 
@@ -81,6 +87,7 @@ public class ShareDAO {
     																							"AND s.share_status_id = ? " +
     																							"AND s.last_modified_date > ? " +
     																							"ORDER BY s.last_modified_date DESC";
+    public static final String QUERY_GET_RESOURCES_OF_SHARES_1 = "SELECT s.share_id,rr.parent_resource_id FROM share AS s INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id WHERE s.share_id IN (REPLACE_THIS)";
     
     public static List<Share> getMostRecent() {
         try {
@@ -140,9 +147,9 @@ public class ShareDAO {
         return ShareDAORowMapper.mapShareList(DB.executeQuery(query));
     }
 
-    public static boolean addShare(Share share) {
+    public static Integer addShare(Share share) {
 		try {
-			PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_ADD_SHARE);
+			PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_ADD_SHARE, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, share.getTitle());
 			ps.setString(2, share.getDescription());
 			ps.setString(3, share.getContent());
@@ -156,11 +163,16 @@ public class ShareDAO {
 			ps.setInt(11, share.getRssResourceId());
 			ps.setInt(12, share.getUserId());
 			ps.setLong(13, share.getLastModifiedDate());
-			return ps.execute();
+			ps.executeUpdate();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+    		if (rs.next()) {
+    			return rs.getInt(1);
+    		}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-        return false;
+        return null;
     }
     
     public static Share getShareByShareId(Integer shareId) {
@@ -239,6 +251,40 @@ public class ShareDAO {
     		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
     		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
     		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    @Transactional
+    public static void addTagToShare(String tag, Integer shareId) {
+    	try {
+    		tag = tag.toLowerCase();
+    		Long tagId = TagDAO.addTag(tag);
+    		if (tagId == null) {
+    			tagId = TagDAO.getTagIdOfTag(tag);
+    		}
+    		TagDAO.addTagToShare(tagId, shareId);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    public static Map<Integer, Integer> getResourcesOfShares(List<Share> shares) {
+    	try {
+    		String replaceThis = null;
+    		for (Share share: shares) {
+    			if (replaceThis != null) {
+    				replaceThis += ",'" + share.getShareId().toString() + "'";
+    			} else {
+    				replaceThis = "'" + share.getShareId().toString() + "'";
+    			}
+    		}
+    		
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_RESOURCES_OF_SHARES_1.replace("REPLACE_THIS", replaceThis));
+    		return ShareDAORowMapper.mapResourcesOfShares(ps.executeQuery());
+    		
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}

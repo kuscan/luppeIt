@@ -94,10 +94,12 @@
 						#{/if}
 						#{else}
 							#{list items:tags, as:'tag'}
+							#{if tag.tagName.indexOf("\${lpt}\$") == -1}
 								<div class="button-cat">${tag.tagName}</div>
 								<a href="#" onclick="confirmShareTag(${tag.shareTagId})"><i class="icon-ok"></i></a>
 								<a href="#" onclick="denyShareTag(${tag.shareTagId})"><i class="icon-remove"></i></a>
 								<br/>
+							#{/if}
 							#{/list}
 						#{/else}
 		            </div>

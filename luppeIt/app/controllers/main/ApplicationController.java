@@ -7,11 +7,13 @@ import database.dao.category.CategoryDAO;
 import database.dao.share.ShareDAO;
 import models.share.Category;
 import models.share.Share;
+import models.userpast.UserPast;
 import play.Logger;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Scope;
+import utils.Recommender;
 import utils.RssReader;
 
 import java.io.IOException;
@@ -67,7 +69,9 @@ public class ApplicationController extends BaseController {
         renderArgs.put("mostRecents", mostRecents);
 
         List<Share> topNews = ShareDAO.getTopNewsForRegisteredUser();
-        renderArgs.put("topNews", topNews);
+        renderArgs.put("topNews", Recommender.recommend(topNews, Cache.get("userPast" + session.get("userId"), UserPast.class)));
+        
+        
 
 
         renderTemplate(NavigationConstants.homePage, arguments);

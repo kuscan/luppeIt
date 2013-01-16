@@ -1,6 +1,7 @@
 package database.dao.tag;
 
 import models.share.Share;
+import models.share.ShareTag;
 import models.share.ShareTagWithName;
 import models.share.Tag;
 
@@ -81,6 +82,22 @@ public class TagDAORowMapper {
     	} catch (SQLException e) {
     		return null;
     	}
+    }
+    
+    public static List<ShareTag> mapShareIdTagIdList(ResultSet rs) {
+    	try {
+    		List<ShareTag> shareTags = new ArrayList<ShareTag>();
+    		while (rs.next()) {
+    			ShareTag st = new ShareTag();
+    			st.setShareId(rs.getInt("share_id"));
+    			st.setTagId(rs.getInt("tag_id"));
+    			shareTags.add(st);
+    		}
+    		return shareTags;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 
 }

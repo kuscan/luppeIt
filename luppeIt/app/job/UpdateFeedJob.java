@@ -48,7 +48,18 @@ public class UpdateFeedJob extends Job {
                 for (Share share: sharesFromRss) {
                     if (!shares.contains(share)) {
                         Logger.info("Share to insert into DB: " + share.getTitle() + " " + share.getUrl());
-                        ShareDAO.addShare(share);
+                        Integer shareId = ShareDAO.addShare(share);
+                        
+                        if (shareId != null) {
+                        	String title = share.getTitle().toLowerCase().replace(".", "").replace(",", "").replace(":", "").replace(";", "").replace("?", "").replace("!", "").replace("\"", "").replace("'", "");
+                        	String [] titleWords = title.split("\\s+");
+                        	
+                        	for (String word: titleWords)
+                        	{
+                        		ShareDAO.addTagToShare("${LPT}$" + word, shareId);
+                        	}
+                        }
+                        
                     }
                 }
                 Calendar cal = Calendar.getInstance();

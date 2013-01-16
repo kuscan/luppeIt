@@ -24,7 +24,7 @@ public class UserPastDAORowMapper {
     
     public static final String COLUMN_SHARE_TAG_TAG_ID = "st.tag_id";
     
-    public static final String COLUMN_RSS_RESOURCE_PARENT_RESOURCE_ID = "rr.parent_resourc_id";
+    public static final String COLUMN_RSS_RESOURCE_PARENT_RESOURCE_ID = "rr.parent_resource_id";
     
     public static List<Integer> mapGetAddedTagsPast(ResultSet rs) {
     	try {

@@ -78,7 +78,7 @@ public class LoginController extends BaseController {
             userPast.setLuppedResources(UserPastDAO.getLuppedSharesResourcesPast(user.getUserId()));
             userPast.setViewedResources(UserPastDAO.getViewedSharesResourcesPast(user.getUserId()));
             userPast.setDiggedResources(UserPastDAO.getDiggedSharesResourcesPast(user.getUserId()));
-            Cache.set("userPast" + user.getUserId().toString(), user, "60mn");
+            Cache.set("userPast" + user.getUserId().toString(), userPast, "60mn");
             
             redirect(LuppeItConstants.BASE_URL);
         }
