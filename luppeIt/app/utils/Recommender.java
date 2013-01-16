@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import play.Logger;
-
 import database.dao.share.ShareDAO;
 import database.dao.tag.TagDAO;
 
@@ -18,6 +16,11 @@ import models.userpast.UserPastUnit;
 public class Recommender {
 	
 	public static List<Share> recommend(List<Share> shares, UserPast userPast) {
+		if (shares == null || shares.size() == 0)
+		{
+			return shares;
+		}
+		
 		Map<Integer, List<Integer>> shareTags = new HashMap<Integer, List<Integer>>();
 		Map<Integer, Integer> shareResources = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> sharePoints = new HashMap<Integer, Integer>();
@@ -26,7 +29,6 @@ public class Recommender {
 		shareResources = ShareDAO.getResourcesOfShares(shares);
 		
 		for (Share share: shares) {
-			Logger.info("Share puanlama basladi: " + share.getShareId().toString());
 			Integer point = 0;
 			
 			if (shareTags.get(share.getShareId()) != null) {
@@ -103,7 +105,6 @@ public class Recommender {
 	
 	private static Boolean checkContains(List<Integer> list, Integer amount) {
 		for (Integer item: list) {
-			Logger.info(item + " " + amount);
 			if (item.intValue() == amount.intValue()) {
 				return true;
 			}

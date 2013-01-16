@@ -8,7 +8,6 @@ import database.dao.share.ShareDAO;
 import models.share.Category;
 import models.share.Share;
 import models.userpast.UserPast;
-import play.Logger;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -65,14 +64,11 @@ public class ApplicationController extends BaseController {
         List<Category> categories = CategoryDAO.getActiveUserCategories(Integer.parseInt(session.get("userId")));
         renderArgs.put("categories", categories);
         
-        List<Share> mostRecents = ShareDAO.getMostRecentForRegisteredUser();
+        List<Share> mostRecents = ShareDAO.getMostRecentForRegisteredUser().subList(0, 100);
         renderArgs.put("mostRecents", mostRecents);
 
-        List<Share> topNews = ShareDAO.getTopNewsForRegisteredUser();
+        List<Share> topNews = ShareDAO.getTopNewsForRegisteredUser().subList(0, 100);
         renderArgs.put("topNews", Recommender.recommend(topNews, Cache.get("userPast" + session.get("userId"), UserPast.class)));
-        
-        
-
 
         renderTemplate(NavigationConstants.homePage, arguments);
     }

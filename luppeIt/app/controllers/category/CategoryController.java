@@ -9,11 +9,12 @@ import models.share.Category;
 import models.share.CategoryWithShareList;
 import models.share.Share;
 import models.user.User;
-import play.Logger;
+import models.userpast.UserPast;
 import play.cache.Cache;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Scope;
+import utils.Recommender;
 import utils.RssReader;
 
 import java.io.IOException;
@@ -50,11 +51,20 @@ public class CategoryController extends BaseController {
     	
     	List<CategoryWithShareList> categoriesWithShares = new ArrayList<CategoryWithShareList>();
     	for (Category category: categories) {
-    		List<Share> shares = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryId(category.getCategoryId());
-    		categoriesWithShares.add(new CategoryWithShareList(category, shares));
+	    	if (checkLogin()) {
+	    		
+	    		List<Share> topNews = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdTopNewsForRegisteredUser(category.getCategoryId());
+	    		categoriesWithShares.add(new CategoryWithShareList(category, Recommender.recommend(topNews, Cache.get("userPast" + getUserId().toString(), UserPast.class))));
+	    		
+	    	} else {
+	    		
+	    		List<Share> topNews = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdTopNews(category.getCategoryId());
+	    		categoriesWithShares.add(new CategoryWithShareList(category, topNews));
+	    		
+	    	}
     	}
     	renderArgs.put("categoriesWithShares", categoriesWithShares);
-        
+    	
         renderTemplate(NavigationConstants.categoriesPage, arguments);
     }
     
@@ -63,11 +73,17 @@ public class CategoryController extends BaseController {
     	
     	Category category = CategoryDAO.getCategoryByCategoryId(categoryId);
     	renderArgs.put("category", category);
-
-    	List<Share> topNews = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryId(categoryId);
-    	renderArgs.put("topNews", topNews);
     	
-    	List<Share> mostRecents = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryId(categoryId);
+    	List<Share> topNews = null;
+    	List<Share> mostRecents = null;
+    	if (checkLogin()) {
+    		topNews = Recommender.recommend(ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdTopNewsForRegisteredUser(categoryId), Cache.get("userPast" + getUserId().toString(), UserPast.class));
+    		mostRecents = Recommender.recommend(ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdMostRecentForRegisteredUser(categoryId), Cache.get("userPast" + getUserId().toString(), UserPast.class));
+    	} else {
+    		topNews = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdTopNews(categoryId);
+    		mostRecents = ShareDAO.getSharesOfLastWeekWithDetailsByCategoryIdMostRecent(categoryId);
+    	}
+    	renderArgs.put("topNews", topNews);
     	renderArgs.put("mostRecents", mostRecents);
     	
     	List<Category> categories = null;

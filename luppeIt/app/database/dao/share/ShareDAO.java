@@ -37,9 +37,15 @@ public class ShareDAO {
      */
     public static final Integer MOST_RECENT_LIMIT = 30;
     public static final Integer TOP_NEWS_LIMIT = 30;
-    public static final Integer MOST_RECENT_LIMIT_FOR_REGISTERED_USER = 200;
-    public static final Integer TOP_NEWS_LIMIT_FOR_REGISTERED_USER = 200;
-
+    public static final Integer MOST_RECENT_LIMIT_FOR_REGISTERED_USER = 400;
+    public static final Integer TOP_NEWS_LIMIT_FOR_REGISTERED_USER = 400;
+    
+    public static final Integer MOST_RECENT_LIMIT_FOR_CATEGORY_SHARES = 100;
+    public static final Integer TOP_NEWS_LIMIT_FOR_CATEGORY_SHARES = 100;
+    
+    public static final Integer MOST_RECENT_LIMIT_FOR_CATEGORY_SHARES_FOR_REGISTERED_USER = 400;
+    public static final Integer TOP_NEWS_LIMIT_FOR_CATEGORY_SHARES_FOR_REGISTERED_USER = 400;
+    
     /*
         Query strings for ShareDAO
      */
@@ -77,7 +83,7 @@ public class ShareDAO {
     public static final String QUERY_UPDATE_SHARE_DIG_COUNT_INCREASE_BY_ONE = "UPDATE share SET dig_count = dig_count + 1 WHERE share_id = ?";
     public static final String QUERY_UPDATE_SHARE_LUPPE_COUNT_DECREASE_BY_ONE = "UPDATE share SET luppe_count = luppe_count - 1 WHERE share_id = ?";
     public static final String QUERY_UPDATE_SHARE_DIG_COUNT_DECREASE_BY_ONE = "UPDATE share SET dig_count = dig_count - 1 WHERE share_id = ?";
-    public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
+    public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_MOST_RECENT = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
     																							"FROM share AS s " +
     																							"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
     																							"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
@@ -86,7 +92,18 @@ public class ShareDAO {
     																							"s.category_id = ? " +
     																							"AND s.share_status_id = ? " +
     																							"AND s.last_modified_date > ? " +
-    																							"ORDER BY s.last_modified_date DESC";
+    																							"ORDER BY s.last_modified_date DESC LIMIT ?";
+    public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_TOP_NEWS = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
+																								"FROM share AS s " +
+																								"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+																								"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+																								"JOIN category AS c ON rr.category_id = c.category_id " +
+																								"WHERE " +
+																								"s.category_id = ? " +
+																								"AND s.share_status_id = ? " +
+																								"AND s.last_modified_date > ? " +
+																								"ORDER BY s.luppe_count DESC, s.view_count DESC LIMIT ?";
+    
     public static final String QUERY_GET_RESOURCES_OF_SHARES_1 = "SELECT s.share_id,rr.parent_resource_id FROM share AS s INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id WHERE s.share_id IN (REPLACE_THIS)";
     
     public static List<Share> getMostRecent() {
@@ -118,7 +135,7 @@ public class ShareDAO {
     public static List<Share> getMostRecentForRegisteredUser() {
         try {
         	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_MOST_RECENT);
-        	ps.setInt(1, MOST_RECENT_LIMIT);
+        	ps.setInt(1, MOST_RECENT_LIMIT_FOR_REGISTERED_USER);
         	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
         } catch (SQLException e) {
         	e.printStackTrace();
@@ -133,7 +150,7 @@ public class ShareDAO {
         	
         	PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_TOP_NEWS);
         	ps.setLong(1, cal.getTimeInMillis());
-        	ps.setInt(2, TOP_NEWS_LIMIT);
+        	ps.setInt(2, TOP_NEWS_LIMIT_FOR_REGISTERED_USER);
         	return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
         } catch (SQLException e) {
         	e.printStackTrace();
@@ -241,15 +258,67 @@ public class ShareDAO {
     	return false;
     }
     
-    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryId(Integer categoryId) {
+    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryIdMostRecent(Integer categoryId) {
     	try {
     		Calendar cal = Calendar.getInstance();
     		cal.add(Calendar.DATE, -7);
     		
-    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID);
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_MOST_RECENT);
     		ps.setInt(1, categoryId);
     		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
     		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
+    		ps.setInt(4, MOST_RECENT_LIMIT_FOR_CATEGORY_SHARES);
+    		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryIdTopNews(Integer categoryId) {
+    	try {
+    		Calendar cal = Calendar.getInstance();
+    		cal.add(Calendar.DATE, -7);
+    		
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_TOP_NEWS);
+    		ps.setInt(1, categoryId);
+    		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
+    		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
+    		ps.setInt(4, TOP_NEWS_LIMIT_FOR_CATEGORY_SHARES);
+    		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryIdMostRecentForRegisteredUser(Integer categoryId) {
+    	try {
+    		Calendar cal = Calendar.getInstance();
+    		cal.add(Calendar.DATE, -7);
+    		
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_MOST_RECENT);
+    		ps.setInt(1, categoryId);
+    		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
+    		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
+    		ps.setInt(4, MOST_RECENT_LIMIT_FOR_CATEGORY_SHARES_FOR_REGISTERED_USER);
+    		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    public static List<Share> getSharesOfLastWeekWithDetailsByCategoryIdTopNewsForRegisteredUser(Integer categoryId) {
+    	try {
+    		Calendar cal = Calendar.getInstance();
+    		cal.add(Calendar.DATE, -7);
+    		
+    		PreparedStatement ps = DB.getConnection().prepareStatement(QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_TOP_NEWS);
+    		ps.setInt(1, categoryId);
+    		ps.setInt(2, LuppeItConstants.SHARE_STATUS_ACTIVE);
+    		ps.setTimestamp(3, new java.sql.Timestamp(cal.getTimeInMillis()));
+    		ps.setInt(4, TOP_NEWS_LIMIT_FOR_CATEGORY_SHARES_FOR_REGISTERED_USER);
     		return ShareDAORowMapper.mapShareListWithDetails(ps.executeQuery());
     	} catch (SQLException e) {
     		e.printStackTrace();

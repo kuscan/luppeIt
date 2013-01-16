@@ -176,4 +176,8 @@ public class Share extends BaseModel {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	public String toString() {
+		return this.getShareId().toString();
+	}
 }
