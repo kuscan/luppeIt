@@ -16,9 +16,9 @@ public class ActionDAO {
 
 	public static final String QUERY_ADD_USER_ACTION = "INSERT INTO user_action (action_id,user_id) VALUES (?,?)";
 	public static final String QUERY_ADD_USER_ACTION_PARAMETER_VALUE = "INSERT INTO user_action_parameter_value (user_action_id,action_parameter_id,parameter_value) VALUES (?,?,?)";
-	public static final String QUERY_CHECK_USER_ACTION = "SELECT COUNT(ua.user_action_id) FROM user_action ua JOIN user_action_parameter_value uapv ON ua.user_action_id = uapv.user_action_id WHERE ua.user_id = ? AND ua.action_id = ? AND uapv.action_parameter_id = ? AND uapv.parameter_value = ?"; 
+	public static final String QUERY_CHECK_USER_ACTION = "SELECT COUNT(ua.user_action_id) FROM user_action ua INNER JOIN user_action_parameter_value uapv ON ua.user_action_id = uapv.user_action_id WHERE ua.user_id = ? AND ua.action_id = ? AND uapv.action_parameter_id = ? AND uapv.parameter_value = ?"; 
 	public static final String QUERY_GET_USER_ACTION_ID_WITH_PARAMETERS = "SELECT ua.user_action_id FROM user_action ua " +
-																		  "JOIN user_action_parameter_value uapv " +
+																		  "INNER JOIN user_action_parameter_value uapv " +
 																		  "ON ua.user_action_id = uapv.user_action_id " +
 																		  "WHERE ua.user_id = ? AND ua.action_id = ? AND uapv.action_parameter_id = ? AND uapv.parameter_value = ?";
 	public static final String QUERY_DELETE_USER_ACTION_PARAMETERS = "DELETE FROM user_action_parameter_value WHERE user_action_id = ?";

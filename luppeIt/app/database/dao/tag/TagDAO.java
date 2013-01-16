@@ -21,7 +21,7 @@ import database.dao.share.ShareDAORowMapper;
 public class TagDAO {
 	
 	public static final String QUERY_GET_CORRESPONDING_TAGS = "SELECT t.tag_name FROM tag t WHERE t.tag_name LIKE ? AND t.tag_status_id = ? ORDER BY RAND() LIMIT 15";
-	public static final String QUERY_GET_TAGS_OF_SHARE = "SELECT st.share_tag_id,st.share_id,st.tag_id,st.truth,t.tag_name FROM share_tag st JOIN tag t ON st.tag_id = t.tag_id WHERE st.share_id = ? AND t.tag_name NOT LIKE '${lpt}$%' ORDER BY st.truth DESC";
+	public static final String QUERY_GET_TAGS_OF_SHARE = "SELECT st.share_tag_id,st.share_id,st.tag_id,st.truth,t.tag_name FROM share_tag st INNER JOIN tag t ON st.tag_id = t.tag_id WHERE st.share_id = ? AND t.tag_name NOT LIKE '${lpt}$%' ORDER BY st.truth DESC";
 	public static final String QUERY_ADD_TAG = "INSERT INTO tag (tag_name,tag_status_id) VALUES (?,?)";
 	public static final String QUERY_GET_TAG_ID_BY_NAME = "SELECT t.tag_id FROM tag t WHERE t.tag_name = ?";
 	public static final String QUERY_ADD_TAG_TO_SHARE = "INSERT INTO share_tag (share_id,tag_id,truth) VALUES (?,?,?)";

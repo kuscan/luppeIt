@@ -51,18 +51,18 @@ public class ShareDAO {
      */
     public static final String QUERY_GET_MOST_RECENT = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
                                                        "FROM share AS s " +
-                                                       "JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
-                                                       "JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
-                                                       "JOIN category as c ON s.category_id = c.category_id " +
+                                                       "INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+                                                       "INNER JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
+                                                       "INNER JOIN category as c ON s.category_id = c.category_id " +
                                                        "WHERE " +
                                                        "s.share_status_id = 1 AND " +
                                                        "rr.rss_resource_status_id = 1 " +
                                                        "ORDER BY s.last_modified_date DESC LIMIT ?";
     public static final String QUERY_GET_TOP_NEWS = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
 											            "FROM share AS s " +
-											            "JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
-											            "JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
-											            "JOIN category as c ON s.category_id = c.category_id " +
+											            "INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+											            "INNER JOIN resource as r ON rr.parent_resource_id = r.resource_id " +
+											            "INNER JOIN category as c ON s.category_id = c.category_id " +
 											            "WHERE " +
 											            "s.last_modified_date > ? AND " +
 											            "s.share_status_id = 1 AND " +
@@ -74,9 +74,9 @@ public class ShareDAO {
     public static final String QUERY_ADD_SHARE = "INSERT INTO share (title,description,content,url,author,luppe_count,dig_count,view_count,category_id,share_status_id,rss_resource_id,user_id,last_modified_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     public static final String QUERY_GET_SHARE_BY_SHARE_ID = "SELECT s.share_id, s.title, s.description, s.content, s.url, s.author, s.luppe_count, s.dig_count, s.view_count, s.category_id, s.share_status_id, s.rss_resource_id, s.user_id, s.last_modified_date, r.resource_name, c.category_name " +
     													"FROM share AS s " +
-    													"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
-    													"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
-    													"JOIN category AS c ON rr.category_id = c.category_id " +
+    													"INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+    													"INNER JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+    													"INNER JOIN category AS c ON rr.category_id = c.category_id " +
     													"WHERE s.share_id = ?";
     public static final String QUERY_UPDATE_SHARE_VIEW_COUNT_INCREASE_BY_ONE = "UPDATE share SET view_count = view_count + 1 WHERE share_id = ?";
     public static final String QUERY_UPDATE_SHARE_LUPPE_COUNT_INCREASE_BY_ONE = "UPDATE share SET luppe_count = luppe_count + 1 WHERE share_id = ?";
@@ -85,9 +85,9 @@ public class ShareDAO {
     public static final String QUERY_UPDATE_SHARE_DIG_COUNT_DECREASE_BY_ONE = "UPDATE share SET dig_count = dig_count - 1 WHERE share_id = ?";
     public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_MOST_RECENT = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
     																							"FROM share AS s " +
-    																							"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
-    																							"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
-    																							"JOIN category AS c ON rr.category_id = c.category_id " +
+    																							"INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+    																							"INNER JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+    																							"INNER JOIN category AS c ON rr.category_id = c.category_id " +
     																							"WHERE " +
     																							"s.category_id = ? " +
     																							"AND s.share_status_id = ? " +
@@ -95,9 +95,9 @@ public class ShareDAO {
     																							"ORDER BY s.last_modified_date DESC LIMIT ?";
     public static final String QUERY_GET_SHARES_OF_LAST_WEEK_WITH_DETAILS_BY_CATEGORY_ID_TOP_NEWS = "SELECT s.share_id,s.title,s.description,s.content,s.url,s.author,s.luppe_count,s.dig_count,s.view_count,s.category_id,s.share_status_id,s.rss_resource_id,s.user_id,s.last_modified_date,r.resource_name,c.category_name " + 
 																								"FROM share AS s " +
-																								"JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
-																								"JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
-																								"JOIN category AS c ON rr.category_id = c.category_id " +
+																								"INNER JOIN rss_resource AS rr ON s.rss_resource_id = rr.rss_resource_id " +
+																								"INNER JOIN resource AS r ON rr.parent_resource_id = r.resource_id " +
+																								"INNER JOIN category AS c ON rr.category_id = c.category_id " +
 																								"WHERE " +
 																								"s.category_id = ? " +
 																								"AND s.share_status_id = ? " +
